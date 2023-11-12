@@ -8,13 +8,13 @@ def sum_recursive(n: int) -> int:
     return n+sum_recursive(n-1)
 
 
-def sum_recursive_tail(n: int, accumulator: int = 0) -> int:
+def sum_recursive_tail(n: int, acc: int = 0) -> int:
     if n == 0:
-        return accumulator
-    return sum_recursive_tail(n-1, accumulator+n)
+        return acc
+    return sum_recursive_tail(n-1, acc+n)
 
 
-def sum_recursive_tail_gen(n: int, accumulator: int = 0) -> int:
+def sum_recursive_tail_gen(n: int, acc: int = 0) -> int:
     if n == 0:
-        yield accumulator
-    yield sum_recursive_tail_gen(n-1, accumulator+n)
+        yield acc
+    yield sum_recursive_tail_gen(n-1, acc+n)

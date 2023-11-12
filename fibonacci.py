@@ -1,6 +1,5 @@
 import sys
 from common import tramp
-from fibonacci_implementations import *
 
 
 def fibonacci_iterative(n: int) -> int:
