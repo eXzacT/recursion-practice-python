@@ -18,23 +18,23 @@ def decimal_to_binary_rec(num: int) -> str:
     return decimal_to_binary_rec(int(num/2))+str(remainder)
 
 
-def decimal_to_binary_rec_tail(num: int, binary_str="") -> str:
+def decimal_to_binary_tail_rec(num: int, binary_str="") -> str:
     if num == 0:
         return binary_str
     remainder = str(num % 2)
-    return decimal_to_binary_rec_tail(int(num/2), remainder+binary_str)
+    return decimal_to_binary_tail_rec(int(num/2), remainder+binary_str)
 
 
-def decimal_to_binary_rec_tail_gen(num: int, binary_str="") -> str:
+def decimal_to_binary_gen(num: int, binary_str="") -> str:
     if num == 0:
         yield binary_str
     remainder = str(num % 2)
-    yield decimal_to_binary_rec_tail_gen(int(num/2), remainder+binary_str)
+    yield decimal_to_binary_gen(int(num/2), remainder+binary_str)
 
 
 print(decimal_to_binary(8))
 print(decimal_to_binary_rec(8))
-print(decimal_to_binary_rec_tail(1131232131241412377))
+print(decimal_to_binary_tail_rec(1131232131241412377))
 
 # Redundant, number needs to be absurdly big to trigger recursion error
-print(tramp(decimal_to_binary_rec_tail_gen, 1131232131241412377))
+print(tramp(decimal_to_binary_gen, 1131232131241412377))

@@ -14,7 +14,7 @@ def find_first_uppercase_letter(s: str) -> tuple[int, chr] | None:
             return (idx, char)
 
 
-def find_first_uppercase_letter_rec(s: str) -> tuple[int, chr] | None:
+def find_first_uppercase_letter_tail_rec(s: str) -> tuple[int, chr] | None:
     length = len(s)
 
     def helper(idx=0):
@@ -32,5 +32,5 @@ upper = "somewhereUpper"
 
 print(find_first_uppercase_letter(noUpper))
 print(find_first_uppercase_letter(upper))
-print(find_first_uppercase_letter_rec(upper))
-print(find_first_uppercase_letter_rec(noUpper))
+print(find_first_uppercase_letter_tail_rec(upper))
+print(find_first_uppercase_letter_tail_rec(noUpper))

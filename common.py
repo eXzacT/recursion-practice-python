@@ -1,2 +1,0 @@
-from tramp import tramp
-from generate_string_repetition import generate_string_repetition
