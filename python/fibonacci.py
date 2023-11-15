@@ -5,16 +5,15 @@ from common import tramp
 def fibonacci_iter(n: int) -> int:
     a = 0
     b = 1
-    if n < 0:
-        print("Incorrect input")
-    elif n == 0:
-        return a
-    elif n == 1:
-        return b
-    else:
-        for _ in range(2, n+1):
-            a, b = b, a+b
-        return b
+
+    if n <= 0:
+        return 0
+    if n == 1:
+        return 1
+
+    for _ in range(n-1):
+        a, b = b, a+b
+    return b
 
 
 def fibonacci_rec(n: int) -> int:
@@ -24,7 +23,7 @@ def fibonacci_rec(n: int) -> int:
 
 
 def fibonacci_tail_rec(n: int, curr=0, nxt=1) -> int:
-    if n == 0:
+    if n <= 0:
         return curr
     else:
         return fibonacci_tail_rec(n-1, nxt, curr+nxt)

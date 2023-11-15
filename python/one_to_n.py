@@ -1,4 +1,4 @@
-# Print 1 to n without using loops
+# Printing 1 to n iteratively and recursively
 from common import tramp
 
 
