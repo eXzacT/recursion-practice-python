@@ -30,6 +30,7 @@ function fibonacciRec(n: number): number {
 }
 
 function fibonacciTailRec(n: number): number {
+    // Not passing a copy of n since we don't care about changing it
     function helper(curr = 0, nxt = 1): number {
         if (n <= 0) {
             return curr;
@@ -38,13 +39,12 @@ function fibonacciTailRec(n: number): number {
         if (n < 1) {
             return nxt;
         }
-        n -= 1;
+        n--;
         return helper(nxt, curr + nxt);
     }
     return helper();
 }
 function fibonacciThunk(n: number): Trampoline<number> {
-    // Not passing a copy of n since we don't care about changing it
     function helper(curr = 0, nxt = 1): Trampoline<number> {
         if (n <= 0) {
             return curr;
@@ -52,8 +52,7 @@ function fibonacciThunk(n: number): Trampoline<number> {
         if (n < 1) {
             return nxt;
         }
-
-        n -= 1
+        n--;
         return () => helper(nxt, curr + nxt);
     }
     return helper();
@@ -67,7 +66,7 @@ function fibonacciThunkBigint(n: bigint): Trampoline<bigint> {
         if (n < 1n) {
             return nxt;
         }
-        n -= 1n;
+        n--;
         return () => helper(nxt, curr + nxt);
     }
     return helper(n);

@@ -38,7 +38,7 @@ function decimalToBinaryThunk(num: bigint): Trampoline<string> {
             return binary;
         }
         const remainder = num % 2n;
-        num = num / 2n;
+        num /= 2n;
         return () => helper(num, remainder + binary);
     }
     return helper(num);

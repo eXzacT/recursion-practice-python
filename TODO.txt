@@ -1,7 +1,6 @@
 TODO
 
 Power Set in Lexicographic order
-Array – Print all possible combinations of r elements in a given array of size n
 Print all increasing sequences of length k from first n natural numbers
 Generate all possible sorted arrays from alternate elements of two given sorted arrays
 Program to find the minimum (or maximum) element of an array
