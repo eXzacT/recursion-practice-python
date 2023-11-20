@@ -1,4 +1,3 @@
-import { range } from './global'
 // All possible combinations of n elements from a given array
 function generateNSizedSets(n: number, arr: number[]): number[][] {
     const res: number[][] = [];
@@ -8,7 +7,8 @@ function generateNSizedSets(n: number, arr: number[]): number[][] {
     // The issue with this approach is there is a lot of empty work
     // We only care about i with binary representation of n 1's
     // So for n=3 we want 1110,1101, 1011 and 0111
-    for (let i = 0; i < possible_combinations; i++) {
+    // We can make it a bit faster by starting from i=n not 0
+    for (let i = n; i < possible_combinations; i++) {
         const set: number[] = [];
         for (let j = 0; j < len; j++) {
             // If j-th bit in i is set, add arr[j] to the combination
@@ -56,29 +56,24 @@ function generateNSizedSetsV2(n: number, arr: number[]): number[][] {
 }
 
 function stringGosperHack(s: string): string {
-    let newString = '';
+    // Starts from -1 because if we found only 1 we already swapped it with 0
     let countOnes = -1;
     let lastIdx = s.length - 1
     for (let i = lastIdx; i >= 0; i--) {
         const prev = s[i - 1]
         const curr = s[i]
-        if (s[i] == '1') {
+        if (curr == '1') {
             countOnes++;
         }
         if (curr == '1' && prev == '0') {
-            newString += s.slice(0, i - 1)
-            newString += '1'
-            newString += '0'
+            let newString = s.slice(0, i - 1)
+            newString += '10'
             newString += '0'.repeat(lastIdx - i - countOnes) + '1'.repeat(countOnes);
-            break
+            return newString
         }
     }
-    if (newString == '') {
-        newString += '1'
-        newString += '0'
-        newString += '0'.repeat(lastIdx - 1) + '1'.repeat(countOnes);
-    }
-    return newString;
+    // Edge case when there are no sequences of 0 being before 1
+    return '10' + '0'.repeat(lastIdx - 1) + '1'.repeat(countOnes);
 }
 
 console.log(generateNSizedSets(6, [1, 2, 3, 4, 4, 1, 2, 2]));

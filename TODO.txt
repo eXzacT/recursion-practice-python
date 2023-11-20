@@ -1,6 +1,6 @@
 TODO
 
-Power Set in Lexicographic order
+
 Print all increasing sequences of length k from first n natural numbers
 Generate all possible sorted arrays from alternate elements of two given sorted arrays
 Program to find the minimum (or maximum) element of an array
