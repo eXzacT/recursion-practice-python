@@ -1,9 +1,6 @@
 TODO
 
-
-Print all increasing sequences of length k from first n natural numbers
 Generate all possible sorted arrays from alternate elements of two given sorted arrays
-Program to find the minimum (or maximum) element of an array
 Sum triangle from array
 Stack – Reverse a stack using recursion
 Sort a stack using recursion
@@ -29,7 +26,6 @@ Print sums of all subsets of a given set
 Find ways an Integer can be expressed as sum of n-th power of unique natural numbers
 Recaman’s sequences
 1 to n bit numbers with no consecutive 1s in binary representation
-Program for Sum the digits of a given number
 Count ways to express a number as sum of powers
 Find m-th summation of first n natural numbers
 Print N-bit binary numbers having more 1’s than 0’s in all prefixes
