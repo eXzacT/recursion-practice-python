@@ -1,5 +1,4 @@
-# Print all increasing sequences of length k
-# from first n natural numbers
+# Print all increasing sequences of length k from first n natural nums
 import itertools
 
 

@@ -1,7 +1,6 @@
 TODO
 
 Generate all possible sorted arrays from alternate elements of two given sorted arrays
-Sum triangle from array
 Stack – Reverse a stack using recursion
 Sort a stack using recursion
 Linked List – Recursive function to delete k-th node from linked list
@@ -29,9 +28,6 @@ Recaman’s sequences
 Count ways to express a number as sum of powers
 Find m-th summation of first n natural numbers
 Print N-bit binary numbers having more 1’s than 0’s in all prefixes
-Generate all passwords from given character set
 Minimum tiles of sizes in powers of two to cover whole area
 Alexander Bogomolny’s UnOrdered Permutation Algorithm
-Print all possible combinations of r elements in a given array of size n
-Print all increasing sequences of length k from first n natural numbers
 Generate all possible sorted arrays from alternate elements of two given sorted arrays
