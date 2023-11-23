@@ -1,6 +1,5 @@
 TODO
 
-Generate all possible sorted arrays from alternate elements of two given sorted arrays
 Stack – Reverse a stack using recursion
 Sort a stack using recursion
 Linked List – Recursive function to delete k-th node from linked list
@@ -24,7 +23,6 @@ Print all n-digit strictly increasing numbers
 Print sums of all subsets of a given set
 Find ways an Integer can be expressed as sum of n-th power of unique natural numbers
 Recaman’s sequences
-1 to n bit numbers with no consecutive 1s in binary representation
 Count ways to express a number as sum of powers
 Find m-th summation of first n natural numbers
 Print N-bit binary numbers having more 1’s than 0’s in all prefixes
