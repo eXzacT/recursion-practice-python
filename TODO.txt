@@ -21,10 +21,7 @@ Mathematical – Print a pattern without using any loop
 Print all non-increasing sequences of sum equal to a given number x
 Print all n-digit strictly increasing numbers
 Print sums of all subsets of a given set
-Find ways an Integer can be expressed as sum of n-th power of unique natural numbers
 Recaman’s sequences
-Count ways to express a number as sum of powers
-Find m-th summation of first n natural numbers
 Print N-bit binary numbers having more 1’s than 0’s in all prefixes
 Minimum tiles of sizes in powers of two to cover whole area
 Alexander Bogomolny’s UnOrdered Permutation Algorithm
