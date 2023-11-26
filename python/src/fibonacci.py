@@ -1,4 +1,5 @@
 import sys
+import time
 from common import tramp
 
 
@@ -22,6 +23,15 @@ def fibonacci_rec(n: int) -> int:
     return fibonacci_rec(n-1) + fibonacci_rec(n-2)
 
 
+def fibonacci_memo(n: int, memo={}) -> int:
+    if n in memo:
+        return memo[n]
+    if n <= 1:
+        return n
+    memo[n] = fibonacci_memo(n-1, memo) + fibonacci_memo(n-2, memo)
+    return memo[n]
+
+
 def fibonacci_tail_rec(n: int, curr=0, nxt=1) -> int:
     if n <= 0:
         return curr
@@ -38,6 +48,8 @@ def fibonacci_gen(n: int, curr=0, nxt=1) -> int:
 
 print([fibonacci_iter(i) for i in range(10)])
 print([fibonacci_rec(i) for i in range(10)])
+print([fibonacci_memo(i) for i in range(10)])
 print([fibonacci_tail_rec(i) for i in range(10)])
+
 sys.set_int_max_str_digits(20899)
 print(tramp(fibonacci_gen, 100_000))
