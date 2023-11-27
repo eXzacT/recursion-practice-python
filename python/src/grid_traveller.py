@@ -2,9 +2,10 @@
 # from top left to bottom right, can only move down or right
 
 def grid_traveller_rec(m: int, n: int) -> int:
+    if m == 0 or n == 0:
+        return "Not a valid grid"
+
     def helper(start_m=1, start_n=1) -> int:
-        if m == 0 or n == 0:
-            return 0
         if start_m == m and start_n == n:
             return 1
         if start_m == m:
