@@ -1,10 +1,12 @@
 # Check if it's possible to generate the target sum using numbers from the array
 # all input numbers are non negative and can be used more than once
+from common import time_execution
 
+
+@time_execution
 def can_sum_iter(target_sum: int, numbers: list[int]) -> bool:
     dp = [False] * (target_sum + 1)
     dp[0] = True
-
     for i in range(target_sum + 1):
         if dp[i]:
             for num in numbers:
@@ -16,6 +18,7 @@ def can_sum_iter(target_sum: int, numbers: list[int]) -> bool:
     return False
 
 
+@time_execution
 def can_sum_iter_v2(target_sum: int, numbers: list[int]) -> bool:
     sums_so_far = set([0])
 
@@ -32,6 +35,7 @@ def can_sum_iter_v2(target_sum: int, numbers: list[int]) -> bool:
     return False
 
 
+@time_execution
 def can_sum_rec(target_sum: int, numbers: list[int]) -> bool:
     nums_len = len(numbers)
 
@@ -44,6 +48,7 @@ def can_sum_rec(target_sum: int, numbers: list[int]) -> bool:
     return helper(0)
 
 
+@time_execution
 def can_sum_memo(target_sum: int, numbers: list[int]) -> bool:
     nums_len = len(numbers)
     memo = {}
@@ -62,6 +67,7 @@ def can_sum_memo(target_sum: int, numbers: list[int]) -> bool:
     return helper(0)
 
 
+@time_execution
 def can_sum_rec_v2(target_sum: int, numbers: list[int]) -> bool:
     def helper(target_sum: int) -> bool:
         if target_sum == 0:
@@ -76,6 +82,7 @@ def can_sum_rec_v2(target_sum: int, numbers: list[int]) -> bool:
     return helper(target_sum)
 
 
+@time_execution
 def can_sum_memo_v2(target_sum: int, numbers: list[int]) -> bool:
     memo = {}
 
@@ -97,12 +104,9 @@ def can_sum_memo_v2(target_sum: int, numbers: list[int]) -> bool:
     return helper(target_sum)
 
 
-print(can_sum_iter(1000, [num for num in range(1, 50)]))
-print(can_sum_iter(57, [5, 50]))
-print(can_sum_iter_v2(1000, [num for num in range(1, 50)]))
-print(can_sum_iter_v2(57, [5, 50]))
-
+print(can_sum_iter(900, [7, 14, 28]))
+print(can_sum_iter_v2(900, [7, 14, 28]))
 print(can_sum_rec(900, [7, 14, 28]))
 print(can_sum_memo(900, [7, 14, 28]))
-print(can_sum_rec_v2(900, [7, 14, 28]))
+# print(can_sum_rec_v2(900, [7, 14, 28]))
 print(can_sum_memo_v2(900, [7, 14, 28]))
