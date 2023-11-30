@@ -27,9 +27,8 @@ def how_sum_rec(target_sum: int, numbers: list[int]) -> list[int] | None:
 
         for num in numbers:
             remainder = target_sum - num
-            result = helper(remainder)
-            if result:
-                return [num] + result
+            if (res := helper(remainder)) is not None:
+                return [num] + res
 
         return None
 
@@ -38,21 +37,18 @@ def how_sum_rec(target_sum: int, numbers: list[int]) -> list[int] | None:
 
 @time_execution
 def how_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int] | None:
-    memo = {}
+    memo = {0: []}
 
     def helper(target_sum: int):
         if target_sum in memo:
             return memo[target_sum]
-        if target_sum == 0:
-            return []
         if target_sum < 0:
             return None
 
         for num in numbers:
             remainder = target_sum - num
-            result = helper(remainder)
-            if result:
-                memo[target_sum] = [num] + result
+            if (res := helper(remainder)) is not None:
+                memo[target_sum] = [num] + res
                 return memo[target_sum]
 
         memo[target_sum] = None
@@ -71,37 +67,10 @@ def how_sum_rec_v2(target_sum: int, numbers: list[int]) -> list[int] | None:
         if sum_so_far > target_sum or idx == nums_len:
             return None
 
-        if (res := helper(idx, sum_so_far+numbers[idx])):
+        if (res := helper(idx, sum_so_far+numbers[idx])) is not None:
             return [numbers[idx]] + res
-
-        if (res := helper(idx+1, sum_so_far)):
+        if (res := helper(idx+1, sum_so_far)) is not None:
             return res
-
-    return helper(0)
-
-
-@time_execution
-def how_sum_rec_v2_memo(target_sum: int, numbers: list[int]) -> list[int] | None:
-    nums_len = len(numbers)
-    memo = {}
-
-    def helper(idx: int, sum_so_far=0):
-        if (idx, sum_so_far) in memo:
-            return memo[(idx, sum_so_far)]
-        if sum_so_far == target_sum:
-            return []
-        if sum_so_far > target_sum or idx == nums_len:
-            return None
-
-        if (res := helper(idx, sum_so_far+numbers[idx])):
-            memo[(idx, sum_so_far)] = [numbers[idx]] + res
-            return memo[(idx, sum_so_far)]
-
-        if (res := helper(idx+1, sum_so_far)):
-            memo[(idx, sum_so_far)] = res
-            return memo[(idx, sum_so_far)]
-
-        return None
 
     return helper(0)
 
@@ -119,11 +88,11 @@ def how_sum_rec_v2_memo(target_sum: int, numbers: list[int]) -> list[int]:
         if sum_so_far > target_sum or idx == nums_len:
             return None
 
-        if (res := helper(idx, sum_so_far + numbers[idx])):
+        if (res := helper(idx, sum_so_far + numbers[idx])) is not None:
             memo[(idx, sum_so_far)] = [numbers[idx]] + res
             return memo[(idx, sum_so_far)]
 
-        if (res := helper(idx + 1, sum_so_far)):
+        if (res := helper(idx + 1, sum_so_far)) is not None:
             memo[(idx, sum_so_far)] = res
             return memo[(idx, sum_so_far)]
 
