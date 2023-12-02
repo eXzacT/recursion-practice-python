@@ -48,7 +48,8 @@ def can_construct_rec_v2(target: str, word_bank: list[str]) -> bool:
             return True
 
         if target.startswith(word_bank[idx]):
-            return helper(target.lstrip(word_bank[idx]), 0) or helper(target, idx+1)
+            return helper(target.lstrip(word_bank[idx]), 0) \
+                or helper(target, idx+1)
         else:
             return helper(target, idx+1)
 
