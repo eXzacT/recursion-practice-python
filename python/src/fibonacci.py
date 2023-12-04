@@ -1,5 +1,4 @@
 import sys
-import time
 from common import tramp
 
 
@@ -15,6 +14,20 @@ def fibonacci_iter(n: int) -> int:
     for _ in range(n-1):
         a, b = b, a+b
     return b
+
+
+def fibonacci_tabulation(n: int) -> list[int]:
+    if n <= 0:
+        return [0]
+    if n == 1:
+        return [1]
+
+    table = [0]*(n+1)
+    table[1] = 1
+    for i in range(2, n+1):
+        table[i] = table[i-1]+table[i-2]
+
+    return table
 
 
 def fibonacci_rec(n: int) -> int:

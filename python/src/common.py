@@ -23,7 +23,7 @@ def time_execution(func: Callable) -> Callable:
         return_val = func(*args, **kwargs)
         end_time = perf_counter()
         print(
-            f"Elapsed seconds of the function {func.__name__} is {end_time-start_time}")
+            f"Elapsed time for {func.__name__:<30} - {(end_time-start_time)*1000:.3f}ms.")
         return return_val
 
     return wrapped_func
