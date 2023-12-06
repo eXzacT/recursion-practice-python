@@ -7,13 +7,13 @@ def all_construct_tabulation(target: str, word_bank: list[str]) -> list[list[str
     table = [[] for _ in range(len(target) + 1)]
     table[0] = [[]]
 
-    for i in range(len(target)):
-        if table[i]:
+    for idx in range(len(target)):
+        if table[idx]:
             for word in word_bank:
-                if target[i:i+len(word)] == word:
+                if target[idx:idx+len(word)] == word:
                     new_combinations = [combination + [word]
-                                        for combination in table[i]]
-                    table[i+len(word)] += new_combinations
+                                        for combination in table[idx]]
+                    table[idx+len(word)] += new_combinations
 
     return table[-1]
 
@@ -39,9 +39,12 @@ def all_construct_rec(target: str, word_bank: list[str]) -> list[list[str]]:
 def all_construct_rec_memo(target: str, word_bank: list[str]) -> list[list[str]]:
     all_constructs = []
     memo = {'': None}
+    memo_count = 0
 
     def helper(target: str, construct=[]) -> list[list[str]]:
+        nonlocal memo_count
         if target in memo:
+            memo_count += 1
             all_constructs.append(construct)
             return
 
@@ -53,7 +56,7 @@ def all_construct_rec_memo(target: str, word_bank: list[str]) -> list[list[str]]
         return
 
     helper(target)
-    return all_constructs
+    return f"{all_constructs}, memo_count: {memo_count}"
 
 
 @time_execution
@@ -69,7 +72,7 @@ def all_construct_rec_v2(target: str, word_bank: list[str]) -> list[list[str]]:
             return
 
         curr_word = word_bank[idx]
-        if target.startswith(curr_word):
+        if target.startswith(curr_word):  # 0 Because we have to consider all words
             helper(target[len(curr_word):], 0, construct+[curr_word])
         helper(target, idx+1, construct)
 
@@ -79,20 +82,9 @@ def all_construct_rec_v2(target: str, word_bank: list[str]) -> list[list[str]]:
 
 print(all_construct_tabulation("enterapotentpot", [
       "a", "p", "ent", "enter", "ot", "o", "t"]))
-print(all_construct_tabulation("purple", [
-      "purp", "p", "ur", "le", "purpl"]))
-
 print(all_construct_rec("enterapotentpot", [
       "a", "p", "ent", "enter", "ot", "o", "t"]))
-print(all_construct_rec("purple", [
-      "purp", "p", "ur", "le", "purpl"]))
-
 print(all_construct_rec_memo("enterapotentpot", [
       "a", "p", "ent", "enter", "ot", "o", "t"]))
-print(all_construct_rec_memo("purple", [
-      "purp", "p", "ur", "le", "purpl"]))
-
 print(all_construct_rec_v2("enterapotentpot", [
       "a", "p", "ent", "enter", "ot", "o", "t"]))
-print(all_construct_rec_v2("purple", [
-      "purp", "p", "ur", "le", "purpl"]))
