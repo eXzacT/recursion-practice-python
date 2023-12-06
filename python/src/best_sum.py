@@ -5,16 +5,18 @@ from common import time_execution
 @time_execution
 def best_sum_tabulation(target_sum, numbers):
     table = [None] * (target_sum + 1)
-    table[0] = []
+    table[0] = []  # Base case
 
     for i in range(target_sum + 1):
         if table[i] is not None:
             for num in numbers:
-                if i + num <= target_sum:
-                    combination = [num] + table[i]
-                    if not table[i + num] or len(combination) < len(table[i + num]):
-                        table[i + num] = combination
+                if i + num < target_sum:
+                    curr_combination = [num] + table[i]
+                    shortest_combination = table[i+num]
+                    if not shortest_combination or len(curr_combination) < len(shortest_combination):
+                        shortest_combination = curr_combination
 
+    # After the loop this will be the shortest combination
     return table[target_sum]
 
 
@@ -41,9 +43,13 @@ def best_sum_rec(target_sum: int, numbers: list[int]) -> list[int]:
 @time_execution
 def best_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int]:
     memo = {0: []}
+    memo_count = 0
 
     def helper(target: int):
+        nonlocal memo_count
+
         if target in memo:
+            memo_count += 1
             return memo[target]
         if target < 0:
             return None
@@ -52,8 +58,10 @@ def best_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int]:
 
         for num in numbers:
             remainder = target-num
+
             if (remainder_combination := helper(remainder)) is not None:
                 combination = remainder_combination + [num]
+
                 if shortest_combination is None \
                         or len(combination) < len(shortest_combination):
                     shortest_combination = combination
@@ -61,57 +69,64 @@ def best_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int]:
         memo[target] = shortest_combination
         return memo[target]
 
+    return f"{helper(target_sum)}, memo count: {memo_count}"
     return helper(target_sum)
 
 
 @time_execution
 def best_sum_rec_v2(target_sum: int, numbers: list[int]) -> list[int] | None:
     nums_len = len(numbers)
-    results = []
+    shortest_combination = None
 
-    def helper(remaining: int, idx=0, nums_so_far=[]):
+    def helper(target: int, idx=0, nums_so_far=[]):
+        nonlocal shortest_combination
 
-        if remaining == 0:
+        if target == 0:
             return nums_so_far
-        if remaining < 0 or idx == nums_len:
+        if target < 0 or idx == nums_len:
             return None
 
-        with_num = helper(
-            remaining - numbers[idx], idx, [numbers[idx]]+nums_so_far)
-        if with_num is not None:
-            results.append(with_num)
+        combination = helper(
+            target - numbers[idx], idx, [numbers[idx]]+nums_so_far)
+        if combination is not None:
+            if shortest_combination is None or len(combination) < len(shortest_combination):
+                shortest_combination = combination
 
-        helper(remaining, idx + 1, nums_so_far)
+        helper(target, idx + 1, nums_so_far)
 
     helper(target_sum)
-    return min(results, key=len) if results else None
+    return shortest_combination
 
 
 @time_execution
 def best_sum_rec_v2_memo(target_sum: int, numbers: list[int]) -> list[int] | None:
-    memo = {}
+    memo = {0: []}
+    memo_count = 0
 
-    def helper(remaining: int, idx=0):
-        if (remaining, idx) in memo:
-            return memo[(remaining, idx)]
-        if remaining == 0:
-            return []
-        if remaining < 0 or idx == len(numbers):
+    def helper(target: int, idx=0):
+        nonlocal memo_count
+        key = target
+
+        if key in memo:
+            memo_count += 1
+            return memo[key]
+        if target < 0 or idx == len(numbers):
             return None
 
-        with_num = helper(remaining - numbers[idx], idx)
+        with_num = helper(target - numbers[idx], idx)
         if with_num is not None:
             with_num = with_num+[numbers[idx]]
 
-        without_num = helper(remaining, idx + 1)
+        without_num = helper(target, idx + 1)
 
         if with_num is None or (without_num is not None and len(without_num) < len(with_num)):
-            memo[(remaining, idx)] = without_num
+            memo[key] = without_num
         else:
-            memo[(remaining, idx)] = with_num
+            memo[key] = with_num
 
-        return memo[(remaining, idx)]
+        return memo[key]
 
+    return f"{helper(target_sum)}, memo count: {memo_count}"
     return helper(target_sum)
 
 

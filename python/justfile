@@ -1,0 +1,5 @@
+create day:
+    python create_project.py {{day}}
+
+work day part:
+    python watch_project.py {{day}} {{part}}

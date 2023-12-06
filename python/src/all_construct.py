@@ -3,7 +3,7 @@ from common import time_execution
 
 
 @time_execution
-def all_construct_iter(target: str, word_bank: list[str]) -> list[list[str]]:
+def all_construct_tabulation(target: str, word_bank: list[str]) -> list[list[str]]:
     table = [[] for _ in range(len(target) + 1)]
     table[0] = [[]]
 
@@ -77,9 +77,9 @@ def all_construct_rec_v2(target: str, word_bank: list[str]) -> list[list[str]]:
     return all_constructs
 
 
-print(all_construct_iter("enterapotentpot", [
+print(all_construct_tabulation("enterapotentpot", [
       "a", "p", "ent", "enter", "ot", "o", "t"]))
-print(all_construct_iter("purple", [
+print(all_construct_tabulation("purple", [
       "purp", "p", "ur", "le", "purpl"]))
 
 print(all_construct_rec("enterapotentpot", [
