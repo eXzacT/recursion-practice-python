@@ -1,7 +1,8 @@
 # Sum triangle from array
-from common import tramp
+from common import tramp, time_execution
 
 
+@time_execution()
 def triangle_sum(arr: list[int]) -> list[list[int]]:
     sum_matrix = [arr]
 
@@ -13,6 +14,7 @@ def triangle_sum(arr: list[int]) -> list[list[int]]:
     return sum_matrix
 
 
+@time_execution()
 def triangle_sum_v2(arr: list[int]) -> list[list[int]]:
     sum_matrix = [arr]
 
@@ -23,6 +25,7 @@ def triangle_sum_v2(arr: list[int]) -> list[list[int]]:
     return sum_matrix
 
 
+@time_execution()
 def triangle_sum_rec(arr: list[int]) -> list[list[int]]:
     row = arr
     sum_matrix = [row]
@@ -41,6 +44,7 @@ def triangle_sum_rec(arr: list[int]) -> list[list[int]]:
     return sum_matrix
 
 
+@time_execution()
 def triangle_sum_tail_rec(arr: list[int]) -> list[list[int]]:
     sum_matrix = [arr]
 
@@ -60,6 +64,7 @@ def triangle_sum_tail_rec(arr: list[int]) -> list[list[int]]:
     return helper(arr)
 
 
+@time_execution(isTrampoline=True)
 def triangle_sum_tail_gen(arr: list[int]) -> list[list[int]]:
     sum_matrix = [arr]
 
@@ -83,4 +88,4 @@ print(triangle_sum([1, 2, 3, 4, 5]))
 print(triangle_sum_v2([1, 2, 3, 4, 5]))
 print(triangle_sum_rec([1, 2, 3, 4, 5]))
 print(triangle_sum_tail_rec([1, 2, 3, 4, 5]))
-print(tramp(triangle_sum_tail_gen, [1, 2, 3, 4, 5]))
+print(tramp(triangle_sum_tail_gen, [num for num in range(800)]))

@@ -1,5 +1,8 @@
 # All possible combinations of n elements from a given array
+from common import time_execution
 
+
+@time_execution()
 def generate_n_sized_sets(n: int, arr: list[int]) -> list[list[int]]:
     length = len(arr)
     possible_combinations = 1 << length
@@ -11,13 +14,6 @@ def generate_n_sized_sets(n: int, arr: list[int]) -> list[list[int]]:
         i_bin = bin(i)
         # Only keep going if we can actually form a set of n elements
         if i_bin.count('1') == n:
-            print(i_bin)
-            # Convert i to binary, remove the '0b' prefix
-            # i_bin_str = i_bin[2:].zfill(len(arr))
-
-            # Convert binary string to a list of integers (0s and 1s)
-            # i_bin_list = [int(bin_digit) for bin_digit in i_bin_str]
-            # combination = list(itertools.compress(arr, i_bin_list))
             combination = [arr[idx] for idx in range(i)
                            if 1 << idx & i != 0]
             combinations.append(combination)
@@ -25,6 +21,7 @@ def generate_n_sized_sets(n: int, arr: list[int]) -> list[list[int]]:
     return combinations
 
 
+@time_execution()
 def generate_n_sized_sets_gosper(n: int, arr: list[int]) -> list[list[int]]:
     length = len(arr)
     possible_combinations = 1 << length
@@ -42,6 +39,7 @@ def generate_n_sized_sets_gosper(n: int, arr: list[int]) -> list[list[int]]:
     return combinations
 
 
+@time_execution()
 def generate_n_sized_sets_rec(n: int, arr: list[int]) -> list[list[int]]:
     length = len(arr)
 
@@ -56,3 +54,8 @@ def generate_n_sized_sets_rec(n: int, arr: list[int]) -> list[list[int]]:
         return with_first + without_first
 
     return helper(n)
+
+
+print(generate_n_sized_sets(5, [1, 2, 3, 4, 5, 1, 2, 3]))
+print(generate_n_sized_sets_gosper(5, [1, 2, 3, 4, 5, 1, 2, 3]))
+print(generate_n_sized_sets_rec(5, [1, 2, 3, 4, 5, 1, 2, 3]))

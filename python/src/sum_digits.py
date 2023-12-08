@@ -1,9 +1,10 @@
-from common import tramp
+# Sum digits of a given number
+from common import tramp, time_execution
 import functools
 import itertools
-# Sum digits of a given number
 
 
+@time_execution()
 def sum_digits(num: int) -> int:
     num_str = str(num)
     digit_sum = 0
@@ -13,6 +14,7 @@ def sum_digits(num: int) -> int:
     return digit_sum
 
 
+@time_execution()
 def sum_digits_v2(num: int) -> int:
     digit_sum = 0
     while num > 0:
@@ -22,14 +24,19 @@ def sum_digits_v2(num: int) -> int:
     return digit_sum
 
 
+@time_execution()
 def sum_digits_rec(num: int) -> int:
-    if num == 0:
-        return 0
-    digit = num % 10
-    num //= 10
-    return digit+sum_digits_rec(num)
+    def helper(num: int) -> int:
+        if num == 0:
+            return 0
+        digit = num % 10
+        num //= 10
+        return digit+helper(num)
+
+    return helper(num)
 
 
+@time_execution()
 def sum_digits_tail_rec(num: int) -> int:
     def helper(num: int, acc=0) -> int:
         if num == 0:
@@ -40,6 +47,7 @@ def sum_digits_tail_rec(num: int) -> int:
     return helper(num)
 
 
+@time_execution(isTrampoline=True)
 def sum_digits_gen(num: int) -> int:
     def helper(num: int, acc=0) -> int:
         if num == 0:
@@ -56,12 +64,6 @@ print(sum_digits_rec(1234))
 print(sum_digits_tail_rec(1234))
 num_str = '5'*1000
 num = int(num_str)
-print(tramp(sum_digits_gen, num))
-
-# Flexing
-num_infinite_repetition = itertools.count(5, 0)  # override step to 0
-num_arr = list(itertools.islice(num_infinite_repetition, 1000))
-num = int(''.join(map(str, num_arr)))
 print(tramp(sum_digits_gen, num))
 
 # BONUS

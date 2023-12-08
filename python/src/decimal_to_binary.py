@@ -1,7 +1,8 @@
 # Decimal to binary number using recursion and iteration
-from common import tramp
+from common import tramp, time_execution
 
 
+@time_execution()
 def decimal_to_binary(num: int) -> str:
     res = ""
     while num / 2 > 0:
@@ -11,25 +12,34 @@ def decimal_to_binary(num: int) -> str:
     return res
 
 
+@time_execution()
 def decimal_to_binary_rec(num: int) -> str:
-    if num == 0:
-        return ""
-    remainder = num % 2
-    return decimal_to_binary_rec(num//2)+str(remainder)
+    def helper(num: int) -> str:
+        if num == 0:
+            return ""
+        remainder = num % 2
+        return helper(num//2)+str(remainder)
+    return helper(num)
 
 
-def decimal_to_binary_tail_rec(num: int, binary_str="") -> str:
-    if num == 0:
-        return binary_str
-    remainder = str(num % 2)
-    return decimal_to_binary_tail_rec(num//2, remainder+binary_str)
+@time_execution()
+def decimal_to_binary_tail_rec(num: int) -> str:
+    def helper(num: int, binary_str="") -> str:
+        if num == 0:
+            return binary_str
+        remainder = str(num % 2)
+        return helper(num//2, remainder+binary_str)
+    return helper(num)
 
 
-def decimal_to_binary_gen(num: int, binary_str="") -> str:
-    if num == 0:
-        yield binary_str
-    remainder = str(num % 2)
-    yield decimal_to_binary_gen(num//2, remainder+binary_str)
+@time_execution(isTrampoline=True)
+def decimal_to_binary_gen(num: int) -> str:
+    def helper(num: int, binary_str=""):
+        if num == 0:
+            yield binary_str
+        remainder = str(num % 2)
+        yield helper(num//2, remainder+binary_str)
+    return helper(num)
 
 
 print(decimal_to_binary(8))

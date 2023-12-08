@@ -2,7 +2,7 @@
 from common import time_execution
 
 
-@time_execution
+@time_execution()
 def count_construct_tabulation(target: str, word_bank: list[str]) -> int:
     target_len = len(target)
     table = [0 for _ in range(target_len+1)]
@@ -18,7 +18,7 @@ def count_construct_tabulation(target: str, word_bank: list[str]) -> int:
     return table[-1]
 
 
-@time_execution
+@time_execution()
 def count_construct_rec(target: str, word_bank: list[str]) -> int:
     word_bank_len = len(word_bank)
 
@@ -38,7 +38,7 @@ def count_construct_rec(target: str, word_bank: list[str]) -> int:
     return helper(target, 0)
 
 
-@time_execution
+@time_execution()
 def count_construct_rec_memo(target: str, word_bank: list[str]) -> int:
     word_bank_len = len(word_bank)
     memo = {'': 1}
@@ -63,7 +63,7 @@ def count_construct_rec_memo(target: str, word_bank: list[str]) -> int:
     return helper(target, 0)
 
 
-@time_execution
+@time_execution()
 def count_construct_rec_v2(target: str, word_bank: list[str]) -> int:
     def helper(target: str):
         if target == '':
@@ -80,7 +80,7 @@ def count_construct_rec_v2(target: str, word_bank: list[str]) -> int:
     return helper(target)
 
 
-@time_execution
+@time_execution()
 def count_construct_rec_v2_memo(target: str, word_bank: list[str]) -> int:
     memo = {'': 1}
     memo_count = 0

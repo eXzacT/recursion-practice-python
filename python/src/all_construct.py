@@ -2,7 +2,7 @@
 from common import time_execution
 
 
-@time_execution
+@time_execution()
 def all_construct_tabulation(target: str, word_bank: list[str]) -> list[list[str]]:
     table = [[] for _ in range(len(target) + 1)]
     table[0] = [[]]
@@ -18,7 +18,7 @@ def all_construct_tabulation(target: str, word_bank: list[str]) -> list[list[str
     return table[-1]
 
 
-@time_execution
+@time_execution()
 def all_construct_rec(target: str, word_bank: list[str]) -> list[list[str]]:
     all_constructs = []
 
@@ -35,7 +35,7 @@ def all_construct_rec(target: str, word_bank: list[str]) -> list[list[str]]:
     return all_constructs
 
 
-@time_execution
+@time_execution()
 def all_construct_rec_memo(target: str, word_bank: list[str]) -> list[list[str]]:
     all_constructs = []
     memo = {'': None}
@@ -59,7 +59,7 @@ def all_construct_rec_memo(target: str, word_bank: list[str]) -> list[list[str]]
     return f"{all_constructs}, memo_count: {memo_count}"
 
 
-@time_execution
+@time_execution()
 def all_construct_rec_v2(target: str, word_bank: list[str]) -> list[list[str]]:
     word_bank_len = len(word_bank)
     all_constructs = []

@@ -1,7 +1,9 @@
 # Generate all passwords from given character set
 import itertools
+from common import time_execution
 
 
+@time_execution()
 def generate_passwords(char_set: set[str]):
     passwords = ['']
     for char in char_set:
@@ -13,6 +15,7 @@ def generate_passwords(char_set: set[str]):
     return passwords[1:]
 
 
+@time_execution()
 def generate_passwords_rec(char_set: set[str]):
     set_len = len(char_set)
 
@@ -36,6 +39,7 @@ print(generate_passwords_rec({'a', 'b', 'd'}))
 # Bonus
 
 
+@time_execution()
 def generate_passwords_itertools(char_set: set[str]):
     passwords = []
 

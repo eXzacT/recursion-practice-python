@@ -1,23 +1,30 @@
 # Printing 1 to n iteratively and recursively
-from common import tramp
+from common import tramp, time_execution
 
 
-def one_to_n(n, start=0):
-    if start > n:
-        return
-    print(start)
-    return one_to_n(n, start+1)
+@time_execution()
+def one_to_n(n) -> list[int]:
+    result = []
 
-
-def one_to_n_gen(n):
-    def helper(start=0):
+    def helper(start: int = 0) -> list[int]:
         if start > n:
-            yield
-        print(start)
-        yield helper(start + 1)
+            return
+        result.append(start)
+        return helper(start+1)
+    helper()
+    return result
+
+
+@time_execution(isTrampoline=True)
+def one_to_n_gen(n) -> list[int]:
+
+    def helper(start=0, res=[]) -> list[int]:
+        if start > n:
+            yield res
+        yield helper(start + 1, res+[start])
     return helper()
 
 
-one_to_n(10)
-# one_to_n(10000)
-tramp(one_to_n_gen, 10_000)
+print(one_to_n(10))
+# print(one_to_n(10000))
+print(tramp(one_to_n_gen, 10_000))

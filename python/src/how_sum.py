@@ -2,7 +2,7 @@
 from common import time_execution
 
 
-@time_execution
+@time_execution()
 def how_sum_tabulation(target_sum: int, numbers: list[int]) -> list[int] | None:
     table = [None]*(target_sum+1)
     table[0] = []  # Base case
@@ -17,7 +17,7 @@ def how_sum_tabulation(target_sum: int, numbers: list[int]) -> list[int] | None:
     return None
 
 
-@time_execution
+@time_execution()
 def how_sum_rec(target_sum: int, numbers: list[int]) -> list[int] | None:
     def helper(target_sum: int):
         if target_sum == 0:
@@ -35,7 +35,7 @@ def how_sum_rec(target_sum: int, numbers: list[int]) -> list[int] | None:
     return helper(target_sum)
 
 
-@time_execution
+@time_execution()
 def how_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int] | None:
     memo = {0: []}
 
@@ -63,7 +63,7 @@ def how_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int] | None:
     return f"Res: {helper(target_sum)}, memo_count: {memo_count}\n"
 
 
-@time_execution
+@time_execution()
 def how_sum_rec_v2(target_sum: int, numbers: list[int]) -> list[int] | None:
     nums_len = len(numbers)
 
@@ -81,7 +81,7 @@ def how_sum_rec_v2(target_sum: int, numbers: list[int]) -> list[int] | None:
     return helper(0)
 
 
-@time_execution
+@time_execution()
 def how_sum_rec_v2_memo(target_sum: int, numbers: list[int]) -> list[int]:
     nums_len = len(numbers)
     memo = {target_sum: []}

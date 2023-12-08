@@ -1,8 +1,10 @@
 # Given two numbers num and pow, find ways num can be expressed as
 # sum of n-th power of unique natural numbers.
 from pprint import pprint
+from common import time_execution
 
 
+@time_execution()
 def sum_of_powers(num: int, pow: int) -> list[int]:
     res = []
 
@@ -21,12 +23,17 @@ def sum_of_powers(num: int, pow: int) -> list[int]:
     return res
 
 
+@time_execution()
 def sum_of_powers_memo(num: int, pow: int) -> list[list[str]]:
+    # TODO FIX
     memo = {}
+    memo_count = 0
 
     def helper(start_num=1, acc=0, temp=[]):
-        key = (start_num, acc, tuple(temp))
+        nonlocal memo_count
+        key = acc
         if key in memo:
+            memo_count += 1
             return memo[key]
 
         if acc == num:
@@ -41,7 +48,7 @@ def sum_of_powers_memo(num: int, pow: int) -> list[list[str]]:
         memo[key] = without_curr + with_curr
         return memo[key]
 
-    return helper()
+    return f"{helper()}, memo_count: {memo_count}"
 
 
 pprint(sum_of_powers(14, 1))

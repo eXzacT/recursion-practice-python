@@ -2,7 +2,7 @@
 from common import time_execution
 
 
-@time_execution
+@time_execution()
 def best_sum_tabulation(target_sum, numbers):
     table = [None] * (target_sum + 1)
     table[0] = []  # Base case
@@ -20,27 +20,31 @@ def best_sum_tabulation(target_sum, numbers):
     return table[target_sum]
 
 
+@time_execution()
 def best_sum_rec(target_sum: int, numbers: list[int]) -> list[int]:
-    if target_sum == 0:
-        return []
-    if target_sum < 0:
-        return None
+    def helper(target_sum: int) -> list[int]:
+        if target_sum == 0:
+            return []
+        if target_sum < 0:
+            return None
 
-    shortest_combination = None
+        shortest_combination = None
 
-    for num in numbers:
-        remainder = target_sum - num
-        remainder_combination = best_sum_rec(remainder, numbers)
+        for num in numbers:
+            remainder = target_sum - num
+            remainder_combination = helper(remainder)
 
-        if remainder_combination is not None:
-            combination = remainder_combination + [num]
-            if shortest_combination is None or len(combination) < len(shortest_combination):
-                shortest_combination = combination
+            if remainder_combination is not None:
+                combination = remainder_combination + [num]
+                if shortest_combination is None or len(combination) < len(shortest_combination):
+                    shortest_combination = combination
 
-    return shortest_combination
+        return shortest_combination
+
+    return helper(target_sum)
 
 
-@time_execution
+@time_execution()
 def best_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int]:
     memo = {0: []}
     memo_count = 0
@@ -73,7 +77,7 @@ def best_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int]:
     return helper(target_sum)
 
 
-@time_execution
+@time_execution()
 def best_sum_rec_v2(target_sum: int, numbers: list[int]) -> list[int] | None:
     nums_len = len(numbers)
     shortest_combination = None
@@ -98,7 +102,7 @@ def best_sum_rec_v2(target_sum: int, numbers: list[int]) -> list[int] | None:
     return shortest_combination
 
 
-@time_execution
+@time_execution()
 def best_sum_rec_v2_memo(target_sum: int, numbers: list[int]) -> list[int] | None:
     memo = {0: []}
     memo_count = 0
@@ -131,7 +135,7 @@ def best_sum_rec_v2_memo(target_sum: int, numbers: list[int]) -> list[int] | Non
 
 
 print(best_sum_tabulation(35, [1, 2, 3]))
-# print(best_sum_rec(10, [1, 2, 3]))
+# print(best_sum_rec(35, [1, 2, 3]))
 print(best_sum_rec_memo(35, [1, 2, 3]))
 print(best_sum_rec_v2(35, [1, 2, 3]))
 print(best_sum_rec_v2_memo(35, [1, 2, 3]))

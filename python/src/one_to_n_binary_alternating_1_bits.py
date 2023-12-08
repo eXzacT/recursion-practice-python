@@ -1,5 +1,8 @@
 # 1 to n bit numbers with no consecutive 1s in binary representation
+from common import time_execution
 
+
+@time_execution()
 def generate_no_consecutive_ones(n: int) -> list[str]:
     if n <= 0:
         return ['']
@@ -15,6 +18,7 @@ def generate_no_consecutive_ones(n: int) -> list[str]:
     return binary_arr
 
 
+@time_execution()
 def generate_no_consecutive_ones_v2(n: int) -> list[str]:
     if n <= 0:
         return ['']
@@ -34,6 +38,7 @@ def generate_no_consecutive_ones_v2(n: int) -> list[str]:
     return ending_in_0 + ending_in_1
 
 
+@time_execution()
 def generate_no_consecutive_ones_rec(n: int) -> list[str]:
     if n <= 0:
         return ['']

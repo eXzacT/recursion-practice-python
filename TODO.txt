@@ -1,7 +1,5 @@
 TODO
 
-Stack – Reverse a stack using recursion
-Sort a stack using recursion
 Linked List – Recursive function to delete k-th node from linked list
 Recursive insertion and traversal linked list
 Reverse a Doubly linked list using recursion

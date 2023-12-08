@@ -3,6 +3,10 @@
 # and so on in increasing order till the arrays are exhausted.
 # The generated arrays should end with an element from B.
 
+from common import time_execution
+
+
+@time_execution()
 def generate_ascending_arrays_from_arrays_rec(A, B):
     result = []
     len_A = len(A)

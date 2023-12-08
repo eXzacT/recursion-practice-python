@@ -4,14 +4,14 @@
 from common import time_execution
 
 
-@time_execution
+@time_execution()
 def natural_nums_summation_formula(m: int, n: int) -> int:
     for _ in range(m):
         n = n*(n+1)//2
     return n
 
 
-@time_execution
+@time_execution()
 def natural_nums_summation_rec_formula(m: int, n: int):
     def helper(m: int):
         if m == 1:
@@ -21,14 +21,14 @@ def natural_nums_summation_rec_formula(m: int, n: int):
     return helper(m)
 
 
-@time_execution
+@time_execution()
 def natural_nums_summation_iter(m: int, n: int) -> int:
     for _ in range(m):
         n = sum(range(1, n+1))
     return n
 
 
-@time_execution
+@time_execution()
 def natural_nums_summation_rec(m: int, n: int) -> int:
     def helper(m: int, n: int):
         if m == 0:
@@ -38,7 +38,7 @@ def natural_nums_summation_rec(m: int, n: int) -> int:
     return helper(m, n)
 
 
-@time_execution
+@time_execution()
 def natural_nums_summation_tabulation(m: int, n: int) -> int:
     table = [0]
     for _ in range(m):
@@ -50,7 +50,7 @@ def natural_nums_summation_tabulation(m: int, n: int) -> int:
     return n
 
 
-@time_execution
+@time_execution()
 def natural_nums_summation_tabulation_v2(m: int, n: int) -> int:
     table = [0]
     start = 1

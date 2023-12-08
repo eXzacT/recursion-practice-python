@@ -3,7 +3,7 @@
 from common import time_execution
 
 
-@time_execution
+@time_execution()
 def grid_traveller_tabulation(m: int, n: int) -> int:
     table = [[0 for _ in range(n+1)]for _ in range(m+1)]
     table[0][0] = 1
@@ -19,7 +19,7 @@ def grid_traveller_tabulation(m: int, n: int) -> int:
     return table[i][j]
 
 
-@time_execution
+@time_execution()
 def grid_traveller_rec(m: int, n: int) -> int:
     if m == 0 or n == 0:
         return 0
@@ -36,7 +36,7 @@ def grid_traveller_rec(m: int, n: int) -> int:
     return helper(1, 1)
 
 
-@time_execution
+@time_execution()
 def grid_traveller_rec_memo(m: int, n: int) -> int:
     # Invalid grid
     if m == 0 or n == 0:
@@ -71,7 +71,7 @@ def grid_traveller_rec_memo(m: int, n: int) -> int:
     return f"Result is: {helper(1, 1)}\nMemo calls: {memo_usages}\nRecursive calls:{recursive_calls}"
 
 
-@time_execution
+@time_execution()
 def grid_traveller_rec_v2(m: int, n: int) -> int:
     def helper(m: int, n: int) -> int:
         if m == 0 or n == 0:
@@ -83,7 +83,7 @@ def grid_traveller_rec_v2(m: int, n: int) -> int:
     return helper(m, n)
 
 
-@time_execution
+@time_execution()
 def grid_traveller_rec_v2_memo(m: int, n: int) -> int:
     memo = {(1, 1): 1}
 

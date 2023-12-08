@@ -3,7 +3,7 @@
 from common import time_execution
 
 
-@time_execution
+@time_execution()
 def can_sum_tabulation(target_sum: int, numbers: list[int]) -> bool:
     table = [False] * (target_sum + 1)  # Worstcase length sum of 1's
     table[0] = True  # Base case, but also enables us to pass the if later
@@ -20,7 +20,7 @@ def can_sum_tabulation(target_sum: int, numbers: list[int]) -> bool:
     return False
 
 
-@time_execution
+@time_execution()
 def can_sum_iter(target_sum: int, numbers: list[int]) -> bool:
     sums_so_far = [0]
 
@@ -38,7 +38,7 @@ def can_sum_iter(target_sum: int, numbers: list[int]) -> bool:
     return False
 
 
-@time_execution
+@time_execution()
 def can_sum_rec(target_sum: int, numbers: list[int]) -> bool:
     nums_len = len(numbers)
 
@@ -52,7 +52,7 @@ def can_sum_rec(target_sum: int, numbers: list[int]) -> bool:
     return helper(0)
 
 
-@time_execution
+@time_execution()
 def can_sum_memo(target_sum: int, numbers: list[int]) -> bool:
     nums_len = len(numbers)
     memo = {}
@@ -76,7 +76,7 @@ def can_sum_memo(target_sum: int, numbers: list[int]) -> bool:
     return f"Res: {helper(0)}, memo_count: {memo_count}"
 
 
-@time_execution
+@time_execution()
 def can_sum_rec_v2(target_sum: int, numbers: list[int]) -> bool:
     def helper(target_sum: int) -> bool:
         if target_sum == 0:
@@ -91,7 +91,7 @@ def can_sum_rec_v2(target_sum: int, numbers: list[int]) -> bool:
     return helper(target_sum)
 
 
-@time_execution
+@time_execution()
 def can_sum_memo_v2(target_sum: int, numbers: list[int]) -> bool:
     memo = {0: True}
 

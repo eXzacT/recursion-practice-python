@@ -3,7 +3,7 @@
 from common import time_execution
 
 
-@time_execution
+@time_execution()
 def can_construct_tabulation(target: str, word_bank: list[str]) -> bool:
     target_len = len(target)
     table = [None for _ in range(target_len+1)]
@@ -23,7 +23,7 @@ def can_construct_tabulation(target: str, word_bank: list[str]) -> bool:
     return False
 
 
-@time_execution
+@time_execution()
 def can_construct_tabulation_v2(target: str, word_bank: list[str]) -> bool:
     target_len = len(target)
     table = [False for _ in range(target_len+1)]
@@ -37,7 +37,7 @@ def can_construct_tabulation_v2(target: str, word_bank: list[str]) -> bool:
     return table[-1]
 
 
-@time_execution
+@time_execution()
 def can_construct_rec(target: str, word_bank: list[str]) -> bool:
     def helper(target: str):
         if target == '':
@@ -51,7 +51,7 @@ def can_construct_rec(target: str, word_bank: list[str]) -> bool:
     return helper(target)
 
 
-@time_execution
+@time_execution()
 def can_construct_rec_memo(target: str, word_bank: list[str]) -> bool:
     memo = {'': True}
     memo_count = 0
@@ -76,7 +76,7 @@ def can_construct_rec_memo(target: str, word_bank: list[str]) -> bool:
     return helper(target)
 
 
-@time_execution
+@time_execution()
 def can_construct_rec_v2(target: str, word_bank: list[str]) -> bool:
     word_bank_len = len(word_bank)
 
@@ -95,7 +95,7 @@ def can_construct_rec_v2(target: str, word_bank: list[str]) -> bool:
     return helper(target)
 
 
-@time_execution
+@time_execution()
 def can_construct_rec_v2_memo(target, word_bank):
     word_bank_len = len(word_bank)
     memo = {'': True}

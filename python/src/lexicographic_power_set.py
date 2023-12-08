@@ -1,5 +1,8 @@
 # Power Set in Lexicographic order
+from common import time_execution
 
+
+@time_execution()
 def lexicographic_power_set(arr: list) -> list[list]:
     power_set = [[]]
     for elem in arr:
@@ -9,6 +12,7 @@ def lexicographic_power_set(arr: list) -> list[list]:
     return power_set
 
 
+@time_execution()
 def lexicographic_power_set_bitwise(arr: list[int]) -> list[list[int]]:
     power_set = []
     length = len(arr)
@@ -22,14 +26,18 @@ def lexicographic_power_set_bitwise(arr: list[int]) -> list[list[int]]:
     return power_set
 
 
+@time_execution()
 def lexicographic_power_set_rec(arr: list) -> list[list]:
-    if len(arr) == 0:
-        return [[]]
+    def helper(arr: list) -> list[list]:
+        if len(arr) == 0:
+            return [[]]
 
-    subsets = lexicographic_power_set_rec(arr[1:])
-    return sorted(subsets + [[arr[0]] + subset for subset in subsets])
+        subsets = helper(arr[1:])
+        return sorted(subsets + [[arr[0]] + subset for subset in subsets])
+    return helper(arr)
 
 
+@time_execution()
 def lexicographic_power_set_rec_v2(arr: list) -> list[list]:
     arr_len = len(arr)
 
@@ -40,3 +48,9 @@ def lexicographic_power_set_rec_v2(arr: list) -> list[list]:
         return helper(idx+1, power_set)
 
     return helper()
+
+
+print(lexicographic_power_set([1, 2, 3, 4, 5, 1]))
+print(lexicographic_power_set_bitwise([1, 2, 3, 4, 5, 1]))
+print(lexicographic_power_set_rec([1, 2, 3, 4, 5, 1]))
+print(lexicographic_power_set_rec_v2([1, 2, 3, 4, 5, 1]))

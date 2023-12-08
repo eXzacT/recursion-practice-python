@@ -2,6 +2,7 @@
 
 import functools
 from typing import Callable, TypeVar
+
 T = TypeVar('T')
 
 

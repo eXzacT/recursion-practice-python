@@ -1,8 +1,9 @@
 # Function to copy string (Iterative and Recursive)
 import string
-from common import tramp
+from common import tramp, time_execution
 
 
+@time_execution()
 def copy_string_iter(s: str) -> str:
     copy = ''
     for c in s:
@@ -11,6 +12,7 @@ def copy_string_iter(s: str) -> str:
     return copy
 
 
+@time_execution()
 def copy_string_rec(s: str) -> str:
     length = len(s)
 
@@ -21,6 +23,7 @@ def copy_string_rec(s: str) -> str:
     return helper(0)
 
 
+@time_execution()
 def copy_string_taiL_rec(s: str) -> str:
     length = len(s)
 
@@ -32,6 +35,7 @@ def copy_string_taiL_rec(s: str) -> str:
     return helper(0)
 
 
+@time_execution(isTrampoline=True)
 def copy_string_gen(s: str) -> str:
     length = len(s)
 
@@ -44,11 +48,9 @@ def copy_string_gen(s: str) -> str:
 
 
 my_string = 'mystring'
-a = copy_string_iter(my_string)
-b = copy_string_rec(my_string)
-c = copy_string_taiL_rec(my_string)
-
-print(a == b == c)
+print(copy_string_iter(my_string))
+print(copy_string_rec(my_string))
+print(copy_string_taiL_rec(my_string))
 
 alphabet = string.ascii_lowercase
 repeated_alphabet = alphabet*1000
