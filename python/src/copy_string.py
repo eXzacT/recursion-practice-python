@@ -1,6 +1,6 @@
 # Function to copy string (Iterative and Recursive)
 import string
-from common import tramp, time_execution
+from common import time_execution
 
 
 @time_execution()
@@ -55,4 +55,4 @@ print(copy_string_taiL_rec(my_string))
 alphabet = string.ascii_lowercase
 repeated_alphabet = alphabet*1000
 # print(copy_string_rec(repeated_alphabet))
-print(tramp(copy_string_gen, repeated_alphabet))
+print(copy_string_gen(repeated_alphabet))

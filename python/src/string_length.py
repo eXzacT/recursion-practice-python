@@ -1,5 +1,5 @@
 # Length of a string using recursion
-from common import tramp, time_execution
+from common import time_execution
 import string
 
 
@@ -52,4 +52,4 @@ print(string_len("pero"))
 print(string_len_tail_rec("pero"))
 print(string_len_tail_rec_v2("pero"))
 # print(string_len_tail_rec_helper(alphabet_repetition))
-print(tramp(string_len_gen, alphabet_repetition))
+print(string_len_gen(alphabet_repetition))

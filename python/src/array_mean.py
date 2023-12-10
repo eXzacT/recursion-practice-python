@@ -1,5 +1,5 @@
 # Mean of Array using Iteration and Recursion
-from common import tramp, time_execution
+from common import time_execution
 import itertools
 import functools
 
@@ -66,7 +66,7 @@ print(array_mean_rec(arr))
 print(array_mean_tail_rec(arr))
 print(array_mean_tail_rec_v2(arr))
 # print(array_mean_rec([i for i in range(10_000)]))
-print(tramp(array_mean_gen, [i for i in range(1, 10_001)]))
+print(array_mean_gen([i for i in range(1, 10_001)]))
 
 # Bonus
 print(list(itertools.accumulate(arr, lambda x, y: x+y))[len(arr)-1]/len(arr))

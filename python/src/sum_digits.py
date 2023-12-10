@@ -1,5 +1,5 @@
 # Sum digits of a given number
-from common import tramp, time_execution
+from common import time_execution
 import functools
 import itertools
 
@@ -64,7 +64,7 @@ print(sum_digits_rec(1234))
 print(sum_digits_tail_rec(1234))
 num_str = '5'*1000
 num = int(num_str)
-print(tramp(sum_digits_gen, num))
+print(sum_digits_gen(num))
 
 # BONUS
 print(functools.reduce(lambda a, b: int(a)+int(b), num_str))

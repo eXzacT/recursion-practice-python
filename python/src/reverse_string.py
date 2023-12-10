@@ -1,5 +1,5 @@
 # Print reverse of a string using iteration & recursion
-from common import tramp, time_execution
+from common import time_execution
 import string
 
 
@@ -53,11 +53,11 @@ def reverse_string_gen(s: str) -> str:
 
 
 alphabet = string.ascii_lowercase
-repeated_alphabet = alphabet * 10_000
+repeated_alphabet = alphabet * 1000
 
 print(reverse_string(alphabet))
 print(reverse_string_rec(alphabet))
 print(reverse_string_tail_rec(alphabet))
 print(reverse_string_tail_rec_v2(alphabet))
 # print(reverse_string_tail_rec_idx_helper(repeated_alphabet))
-print(tramp(reverse_string_gen, repeated_alphabet))
+print(reverse_string_gen(repeated_alphabet))

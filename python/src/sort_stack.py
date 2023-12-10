@@ -1,6 +1,6 @@
 # Sort a stack using recursion
 from typing import TypeVar
-from common import time_execution, tramp
+from common import time_execution
 
 # Any sortable type
 T = TypeVar('T', int, float, str, list, tuple, range, set,

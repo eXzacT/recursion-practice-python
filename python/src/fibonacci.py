@@ -1,5 +1,5 @@
 import sys
-from common import tramp, time_execution
+from common import time_execution
 
 
 @time_execution()
@@ -83,5 +83,5 @@ print(fibonacci_tabulation(10))
 print(fibonacci_rec(10))
 print(fibonacci_tail_rec(10))
 
-sys.set_int_max_str_digits(20899)
-print(tramp(fibonacci_gen, 100_000))
+sys.set_int_max_str_digits(500_000)
+print(fibonacci_gen(100_000))

@@ -1,21 +1,4 @@
-TODO
-
-Linked List – Recursive function to delete k-th node from linked list
-Recursive insertion and traversal linked list
-Reverse a Doubly linked list using recursion
-Delete a linked list using recursion
-Print alternate nodes of a linked list using recursion
-Recursive approach for alternating split of Linked List
-Find middle of singly linked list Recursively
-Practice questions for Linked List and Recursion
-Binary Tree – Print all leaf nodes of a Binary Tree from left to right
-Leaf nodes from Preorder of a Binary Search Tree (Using Recursion)
-Dynamic Programming – Print all longest common sub-sequences in lexicographical order
-Recursive Tower of Hanoi using 4 pegs / rods
-Time Complexity Analysis | Tower Of Hanoi (Recursion)
-Sorting – Recursive Bubble Sort
-Recursive Insertion Sort
-Mathematical – Print a pattern without using any loop
+Print a pattern without using any loop
 Print all non-increasing sequences of sum equal to a given number x
 Print all n-digit strictly increasing numbers
 Print sums of all subsets of a given set

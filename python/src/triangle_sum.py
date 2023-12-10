@@ -1,5 +1,5 @@
 # Sum triangle from array
-from common import tramp, time_execution
+from common import time_execution
 
 
 @time_execution()
@@ -88,4 +88,4 @@ print(triangle_sum([1, 2, 3, 4, 5]))
 print(triangle_sum_v2([1, 2, 3, 4, 5]))
 print(triangle_sum_rec([1, 2, 3, 4, 5]))
 print(triangle_sum_tail_rec([1, 2, 3, 4, 5]))
-print(tramp(triangle_sum_tail_gen, [num for num in range(800)]))
+print(triangle_sum_tail_gen([num for num in range(800)]))

@@ -1,5 +1,5 @@
 # Sum of first n numbers
-from common import time_execution, tramp
+from common import time_execution
 
 
 @time_execution()
@@ -37,4 +37,4 @@ def sum_gen(n: int) -> int:
 print(sum_formula(35))
 print(sum_rec(35))
 print(sum_tail_rec(35))
-print(tramp(sum_gen, 100_000))
+print(sum_gen(100_000))

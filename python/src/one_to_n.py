@@ -1,5 +1,5 @@
 # Printing 1 to n iteratively and recursively
-from common import tramp, time_execution
+from common import time_execution
 
 
 @time_execution()
@@ -27,4 +27,4 @@ def one_to_n_gen(n) -> list[int]:
 
 print(one_to_n(10))
 # print(one_to_n(10000))
-print(tramp(one_to_n_gen, 10_000))
+print(one_to_n_gen(10_000))

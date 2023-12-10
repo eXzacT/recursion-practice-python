@@ -1,6 +1,6 @@
 # First uppercase letter in a string (Iterative and Recursive)
 import string
-from common import time_execution, tramp
+from common import time_execution
 
 
 @time_execution()
@@ -53,4 +53,4 @@ print(find_first_uppercase_letter(noUpper))
 print(find_first_uppercase_letter(upper))
 print(find_first_uppercase_letter_tail_rec(upper))
 print(find_first_uppercase_letter_tail_rec(noUpper))
-print(tramp(find_first_uppercase_letter_gen, alphabet))
+print(find_first_uppercase_letter_gen(alphabet))

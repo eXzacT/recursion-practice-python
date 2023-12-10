@@ -1,5 +1,5 @@
 # Decimal to binary number using recursion and iteration
-from common import tramp, time_execution
+from common import time_execution
 
 
 @time_execution()
@@ -46,4 +46,4 @@ print(decimal_to_binary(8))
 print(decimal_to_binary_rec(8))
 print(decimal_to_binary_tail_rec(8))
 # print(decimal_to_binary_tail_rec(2**1000))
-print(tramp(decimal_to_binary_gen, 2**1000))
+print(decimal_to_binary_gen(2**1000))
