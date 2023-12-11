@@ -9,9 +9,9 @@ def pattern(n: int):
     def helper(m: int):
         if m == total_rows+2:
             return total_rows
-        print(' '*((total_rows-m)//2)+'*'*m+' '*((total_rows-m)//2))
+        print((m * '*').center(total_rows))
         res = helper(m+2)-2
-        print(' '*((total_rows-res)//2)+'*'*res+' '*((total_rows-res)//2))
+        print((res * '*').center(total_rows))
         return res
 
     helper(1)
@@ -21,10 +21,9 @@ def pattern(n: int):
 def pattern_tabulation(n: int):
     pattern = []
 
-    # Compute the first half of the pattern
     for i in range(n):
-        row = ' ' * (n - i - 1) + '*' * (2 * i + 1)
-        pattern.append(row)
+        row = '*' * (2 * i + 1)
+        pattern.append(row.center(2 * n - 1))
 
     for p in pattern:
         print(p)
@@ -38,8 +37,8 @@ def pattern_tabulation_v2(n: int):
 
     # Compute the first half of the pattern
     for i in range(n):
-        row = ' ' * (n - i - 1) + '*' * (2 * i + 1)
-        pattern.append(row)
+        row = '*' * (2 * i + 1)
+        pattern.append(row.center(2 * n - 1))
 
     for idx in range(len(pattern)*2):
         if idx == len(pattern):
@@ -56,8 +55,8 @@ def pattern_tabulation_v3(n: int):
 
     # Compute the first half of the pattern
     for i in range(n):
-        row = ' ' * (n - i - 1) + '*' * (2 * i + 1)
-        pattern.append(row)
+        row = '*' * (2 * i + 1)
+        pattern.append(row.center(2 * n - 1))
 
     # Reverse the pattern for next half and skip last
     pattern += pattern[-2::-1]

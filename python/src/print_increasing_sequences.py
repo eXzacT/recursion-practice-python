@@ -3,7 +3,7 @@ import itertools
 from common import time_execution
 
 
-@time_execution()
+@time_execution(executions=1)
 def print_increasing_sequences(n: int, k: int):
     possible_combinations = 1 << n
     smallest_combination = (1 << k)-1
@@ -14,7 +14,7 @@ def print_increasing_sequences(n: int, k: int):
                    if 1 << (num-1) & i != 0])
 
 
-@time_execution()
+@time_execution(executions=1)
 def print_increasing_sequences_gosper(n: int, k: int):
     combination = (1 << k)-1
     possible_combinations = 1 << n
@@ -29,7 +29,7 @@ def print_increasing_sequences_gosper(n: int, k: int):
         combination = right_shifted | left_side
 
 
-@time_execution()
+@time_execution(executions=1)
 def print_increasing_sequences_rec(n: int, k: int):
     def helper(num=1, seq=[]):
         if len(seq) == k:
