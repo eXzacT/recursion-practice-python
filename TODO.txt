@@ -1,5 +1,4 @@
 Print all n-digit strictly increasing numbers
-Print sums of all subsets of a given set
 Recaman’s sequences
 Print N-bit binary numbers having more 1’s than 0’s in all prefixes
 Minimum tiles of sizes in powers of two to cover whole area
