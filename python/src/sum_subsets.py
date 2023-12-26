@@ -5,8 +5,8 @@ from common import time_execution
 
 @time_execution()
 def sum_subsets(arr: list[int]) -> list[int]:
-    return [sum([arr[j] for j in range(len(arr)) if i & (
-        1 << j)]) for i in range(1 << len(arr))]
+    return [sum([arr[j] for j in range(len(arr)) if i & (1 << j)])
+            for i in range(1 << len(arr))]
 
 
 @time_execution()
