@@ -1,2 +1,1 @@
-Alexander Bogomolny’s UnOrdered Permutation Algorithm
 Generate all possible sorted arrays from alternate elements of two given sorted arrays
