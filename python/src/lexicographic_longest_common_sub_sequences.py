@@ -2,8 +2,6 @@
 from pprint import pprint
 from common import time_execution
 
-# TODO memoize this
-
 
 @time_execution()
 def longest_common_sub_sequences_rec(s1: str, s2: str) -> list[str]:
@@ -23,6 +21,37 @@ def longest_common_sub_sequences_rec(s1: str, s2: str) -> list[str]:
 
     helper(s1)
     return sorted(list(filter(lambda x: len(x) == len(max(sub_sequences, key=len)), sub_sequences)))
+
+
+@time_execution(executions=100)
+def longest_common_sub_sequences_memo(s1: str, s2: str) -> list:
+
+    sub_sequences = []
+    memo_hit = 0
+    memo = {}
+
+    def helper(s1: str, start=0, string_so_far=''):
+        # Not sure why it's faster for s1 instead of start for key but has less hits
+        nonlocal memo_hit
+        key = (s1, string_so_far)
+        if s1 == '' or start == len(s2):
+            sub_sequences.append(string_so_far)
+            return
+        if key in memo:
+            memo_hit += 1
+            return memo[key]
+        for idx in range(start, len(s2)):
+            char = s2[idx]
+            if char not in s1:
+                continue
+
+            helper(s1[s1.find(char)+1:], idx+1, string_so_far+char)
+
+        memo[key] = sub_sequences
+        return memo[key]
+
+    helper(s1)
+    return sorted(list(filter(lambda x: len(x) == len(max(sub_sequences, key=len)), sub_sequences))), f"Memo hits: {memo_hit}"
 
 
 @time_execution()
@@ -53,5 +82,8 @@ def longest_common_sub_sequences_tabulation(s1: str, s2: str) -> list[str]:
     return sorted(table[m][n])
 
 
-print(longest_common_sub_sequences_tabulation('ABCBDAB', 'BDCAB'))
-print(longest_common_sub_sequences_rec('ABCBDAB', 'BDCAB'))
+s1 = 'ABCBDABABCBDAB'
+s2 = 'BDCABBDCAB'
+print(longest_common_sub_sequences_tabulation(s1, s2))
+print(longest_common_sub_sequences_rec(s1, s2))
+print(longest_common_sub_sequences_memo(s1, s2))
