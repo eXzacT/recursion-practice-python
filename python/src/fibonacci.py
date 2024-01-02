@@ -1,5 +1,5 @@
 import sys
-from common import time_execution
+from common import time_execution, RecursionTree
 
 
 @time_execution()
@@ -82,3 +82,32 @@ print(fibonacci_tail_rec(10))
 
 sys.set_int_max_str_digits(500_000)
 print(fibonacci_gen(100_000))
+
+
+@time_execution(executions=1)
+def fibonacci_rec(n: int, tree: RecursionTree) -> int:
+    # Visualization
+    def helper(n: int, tree: RecursionTree):
+        tree.call = 'fibonacci_rec('+str(n)+')'
+        if n <= 1:
+            tree.returned = n
+            return n
+
+        child1 = RecursionTree()
+        tree.children.append(child1)
+        res1 = helper(n-1, child1)
+
+        child2 = RecursionTree()
+        tree.children.append(child2)
+        res2 = helper(n-2, child2)
+
+        res = res1 + res2
+        tree.returned = res
+        return res
+
+    return helper(n, tree)
+
+
+tree = RecursionTree()
+fibonacci_rec(5, tree)
+tree.printTree()

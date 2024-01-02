@@ -1,8 +1,12 @@
+import sys
+from typing import Any
 from collections import deque
 from types import GeneratorType
 from typing import Callable
 from time import perf_counter
 from functools import wraps
+
+sys.stdout.reconfigure(encoding='utf-8')
 
 
 def consume(iter):
@@ -42,3 +46,22 @@ def time_execution(isTrampoline: bool = False, executions: int = 10) -> Callable
             return return_val
         return wrapped_func
     return inner_func
+
+
+class RecursionTree:
+    def __init__(self):
+        self.call: str = ''
+        self.returned: Any = None
+        self.children: list[RecursionTree] = []
+
+    def printTree(self, indent: str = ''):
+        if self is None or len(self.children) == 0:
+            print(self.call + ' returned ' + str(self.returned))
+        else:
+            print(self.call + ' returned ' + str(self.returned))
+            for child in self.children[:-1]:
+                print(indent + '|' + '-' * 4, end='')
+                child.printTree(indent + '|' + ' ' * 4)
+            child = self.children[-1]
+            print(indent + '└' + '-' * 4, end='')
+            child.printTree(indent + '  ' * 4)
