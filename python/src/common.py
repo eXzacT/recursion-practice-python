@@ -25,9 +25,9 @@ def tramp(gen, *args, **kwargs):
 
 
 def time_execution(isTrampoline: bool = False, executions: int = 10) -> Callable:
-    def inner_func(func: Callable) -> Callable:
+    def decorator(func: Callable) -> Callable:
         @wraps(func)
-        def wrapped_func(*args, **kwargs):
+        def wrapper(*args, **kwargs):
             elapsed_time = 0
             return_val = None
             for _ in range(executions):
@@ -42,10 +42,10 @@ def time_execution(isTrampoline: bool = False, executions: int = 10) -> Callable
                 end = perf_counter()
                 elapsed_time += end - start
             print(
-                f"Elapsed time for {func.__name__.ljust(50,'.')}avg = {(elapsed_time/executions)*1000:.3f}ms.")
+                f"Elapsed time for {func.__name__.ljust(50,'.')}avg = {(elapsed_time/executions)*1000:.4f}ms of {executions} times.")
             return return_val
-        return wrapped_func
-    return inner_func
+        return wrapper
+    return decorator
 
 
 class RecursionTree:
