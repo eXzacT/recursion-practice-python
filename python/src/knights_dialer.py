@@ -37,6 +37,22 @@ def count_paths_dp(digit: int, hops: int) -> int:
 
 
 @time_execution()
+def count_paths_dp_v2(digit: int, hops: int) -> int:
+    dp = [1 for _ in range(10)]  # 1 way to get to each digit with 0 hops
+
+    for _ in range(hops):
+        temp_dp = [0 for _ in range(10)]
+        for d in range(10):
+            # How many ways to get to 'd'? sum of ways to get to its predecessors
+            for nxt in leads_to[d]:
+                temp_dp[d] += dp[nxt]
+
+        dp = temp_dp
+
+    return dp[digit]
+
+
+@time_execution()
 def count_paths(digit: int, hops: int) -> int:
     def helper(digit: int, hops: int) -> int:
         if hops == 0:
@@ -71,6 +87,7 @@ def count_paths_memo(digit: int, hops: int) -> int:
 
 
 print(count_paths_dp(4, 15))
+print(count_paths_dp_v2(4, 15))
 print(count_paths_dp_np(4, 15))
 print(count_paths(4, 15))
 print(count_paths_memo(4, 15))
