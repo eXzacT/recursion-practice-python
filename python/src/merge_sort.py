@@ -51,10 +51,9 @@ def merge_sort_rec(arr: list[int]) -> list[int]:
                 merged_arr.append(arr2[j])
                 j += 1
 
-        if i < len(arr1):  # First array still not exhausted
-            merged_arr.extend(arr1[i:])
-        if j < len(arr2):  # Second array still not exhausted
-            merged_arr.extend(arr2[j:])
+        # If any of the arrays are still not exhausted just add them to end
+        merged_arr.extend(arr1[i:])
+        merged_arr.extend(arr2[j:])
 
         return merged_arr
 
