@@ -13,7 +13,7 @@ def has_adjacent_duplicates_iter(s: str) -> bool:
 @time_execution()
 def has_adjacent_duplicates_rec(s: str) -> bool:
     def helper(idx: int) -> bool:
-        if idx == len(s):
+        if idx >= len(s):
             return False
         if s[idx] == s[idx-1]:
             return True
@@ -25,7 +25,7 @@ def has_adjacent_duplicates_rec(s: str) -> bool:
 @time_execution(isTrampoline=True)
 def has_adjacent_duplicates_gen(s: str) -> bool:
     def helper(idx: int) -> bool:
-        if idx == len(s):
+        if idx >= len(s):
             yield False
         if s[idx] == s[idx-1]:
             yield True
