@@ -1,48 +1,47 @@
-# First uppercase letter in a string (Iterative and Recursive)
 import string
 from common import time_execution
 
 
 @time_execution()
-def find_first_uppercase_letter_ascii(s: str) -> tuple[int, str] | None:
+def find_first_uppercase_letter_ascii(s: str) -> int:
     for idx, char in enumerate(s):
-        if ord(char) in range(65, 91):
-            return (idx, char)
+        if 65 <= ord(char) <= 90:
+            return idx
+
+    return -1
 
 
 @time_execution()
-def find_first_uppercase_letter(s: str) -> tuple[int, str] | None:
+def find_first_uppercase_letter(s: str) -> int:
     for idx, char in enumerate(s):
-        if char in string.ascii_uppercase:
-            return (idx, char)
+        if str.upper(char) == char:
+            return idx
+
+    return -1
 
 
 @time_execution()
-def find_first_uppercase_letter_tail_rec(s: str) -> tuple[int, str] | None:
-    length = len(s)
-
-    def helper(idx=0):
-        if idx >= length:
-            return None
-        if s[idx] in string.ascii_uppercase:
-            return (idx, s[idx])
+def find_first_uppercase_letter_tail_rec(s: str) -> int:
+    def helper(idx: int = 0):
+        if idx == len(s):
+            return -1
+        if str.upper(s[idx]) == s[idx]:
+            return idx
         return helper(idx+1)
 
-    return helper(0)
+    return helper()
 
 
 @time_execution(isTrampoline=True)
-def find_first_uppercase_letter_gen(s: str) -> tuple[int, str] | None:
-    length = len(s)
-
-    def helper(idx=0):
-        if idx >= length:
-            yield None
-        if s[idx] in string.ascii_uppercase:
-            yield (idx, s[idx])
+def find_first_uppercase_letter_gen(s: str) -> int:
+    def helper(idx: int = 0):
+        if idx == len(s):
+            yield -1
+        if str.upper(s[idx]) == s[idx]:
+            yield idx
         yield helper(idx+1)
 
-    return helper(0)
+    return helper()
 
 
 noUpper = "nouppercase"

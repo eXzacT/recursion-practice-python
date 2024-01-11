@@ -7,12 +7,12 @@ def fibonacci_iter(n: int) -> int:
     a = 0
     b = 1
 
-    if n <= 0:
+    if n == 0:
         return 0
     if n == 1:
         return 1
 
-    for _ in range(n-1):
+    for _ in range(2, n+1):
         a, b = b, a+b
     return b
 
@@ -44,8 +44,6 @@ def fibonacci_rec(n: int) -> int:
 @time_execution()
 def fibonacci_memo(n: int) -> int:
     memo = {0: 0, 1: 1}
-    if n < 0:
-        return 0
 
     def helper(n: int) -> int:
         if n in memo:
@@ -58,7 +56,7 @@ def fibonacci_memo(n: int) -> int:
 @time_execution()
 def fibonacci_tail_rec(n: int) -> int:
     def helper(n: int, curr=0, nxt=1):
-        if n <= 0:
+        if n == 0:
             return curr
         else:
             return helper(n-1, nxt, curr+nxt)

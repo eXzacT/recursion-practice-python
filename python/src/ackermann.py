@@ -3,6 +3,7 @@ from common import time_execution, RecursionTree
 
 @time_execution()
 def ackermann_dp(m: int, n: int) -> int:
+    '''Doesn't work for ('m',0), not sure how to fix it'''
     dp = [[0 for _ in range(n+1)] for _ in range(m+1)]
 
     for i in range(m+1):

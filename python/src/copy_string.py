@@ -1,4 +1,3 @@
-# Function to copy string (Iterative and Recursive)
 import string
 from common import time_execution
 
@@ -28,7 +27,7 @@ def copy_string_taiL_rec(s: str) -> str:
     length = len(s)
 
     def helper(idx: int, acc='') -> str:
-        if idx >= length:
+        if idx == length:
             return acc
         curr = s[idx]
         return helper(idx+1, acc+curr)
