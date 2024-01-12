@@ -39,9 +39,24 @@ function fib_rec(int $n): int
     return fib_rec($n - 1) + fib_rec($n - 2);
 }
 
-function fib_rec_v2(int $n, int $curr = 0, int $nxt = 1): int
+function fib_tail_rec(int $n, int $curr = 0, int $nxt = 1): int
 {
     if ($n == 0)
         return $curr;
-    return fib_rec_v2($n - 1, curr: $nxt, nxt: $curr + $nxt);
+    return fib_tail_rec($n - 1, curr: $nxt, nxt: $curr + $nxt);
+}
+
+function fib_memo(int $n): int
+{
+    $memo = [0 => 0, 1 => 1];
+    $helper = function (int $n) use (&$memo, &$helper) {
+        if (isset($memo[$n])) {
+            return $memo[$n];
+        }
+
+        $memo[$n] = $helper($n - 2) + $helper($n - 1);
+        return $memo[$n];
+    };
+
+    return $helper($n);
 }

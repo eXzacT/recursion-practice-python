@@ -41,7 +41,7 @@ function ackermann_rec(int $m, int $n): int
 function ackermann_rec_memo(int $m, int $n): int
 {
     $memo = [];
-    $helper = function (int $m, int $n) use ($memo, &$helper): int {
+    $helper = function (int $m, int $n) use (&$memo, &$helper): int {
         $key = serialize([$m, $n]);
         if (isset($memo[$key])) {
             return $memo[$key];

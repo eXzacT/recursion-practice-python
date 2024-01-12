@@ -11,13 +11,25 @@ $test_cases = [
     [[3, 4], 125]
 ];
 
-it('returns the correct ackermanns number', function ($input, $expected) {
+$functions = [
+    'ackermann_dp' => 'ackermann_dp',
+    'ackermann_rec' => 'ackermann_rec',
+    'ackermann_rec_memo' => 'ackermann_rec_memo',
+];
+
+it('returns the correct ackermanns number', function ($input, $expected) use ($functions) {
     [$m, $n] = $input;
-    expect(ackermann_dp($m, $n))->toBe($expected);
-    expect(ackermann_rec($m, $n))->toBe($expected);
-    expect(ackermann_rec_memo($m, $n))->toBe($expected);
+    foreach ($functions as $func_name => $func) {
+        $start_time = microtime(true);
+        expect($func($m, $n))->toBe($expected);
+        $end_time = microtime(true);
+        echo "Execution time of '{$func_name}': " . round(($end_time - $start_time) * 1000, 4) . " ms\n";
+    }
 })->with($test_cases);
 
 it('returns the correct ackermanns number for a large input', function () {
-    expect(ackermann_dp(5, 5))->toBe(11174165);
+    $start_time = microtime(true);
+    expect(ackermann_dp(6, 6))->toBe(1014754159855);
+    $end_time = microtime(true);
+    echo "Execution time of 'ackermann_dp': " . round(($end_time - $start_time) * 1000, 4) . " ms\n";
 });
