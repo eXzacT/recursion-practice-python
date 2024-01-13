@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../src/can_construct.php';
+require __DIR__ . '/../../src/construct_can.php';
 
 $test_cases = [
     [["enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"]], true],
@@ -8,12 +8,12 @@ $test_cases = [
 ];
 
 $functions = [
-    'can_construct_dp' => 'can_construct_dp',
-    'can_construct_dp_v2' => 'can_construct_dp_v2',
-    'can_construct_rec' => 'can_construct_rec',
-    'can_construct_rec_v2' => 'can_construct_rec_v2',
-    'can_construct_rec_v3' => 'can_construct_rec_v3',
-    'can_construct_rec_memo' => 'can_construct_rec_memo',
+    'construct_can_dp' => 'construct_can_dp',
+    'construct_can_dp_v2' => 'construct_can_dp_v2',
+    'construct_can_rec' => 'construct_can_rec',
+    'construct_can_rec_v2' => 'construct_can_rec_v2',
+    'construct_can_rec_v3' => 'construct_can_rec_v3',
+    'construct_can_rec_memo' => 'construct_can_rec_memo',
 ];
 
 it('returns whether a given string can be constructed from a given word bank', function ($input, $expected) use ($functions) {
@@ -24,4 +24,5 @@ it('returns whether a given string can be constructed from a given word bank', f
         $end_time = microtime(true);
         echo "Execution time of '{$func_name}': " . round(($end_time - $start_time) * 1000, 4) . " ms\n";
     }
+    echo "\n";
 })->with($test_cases);

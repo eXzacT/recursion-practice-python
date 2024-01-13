@@ -1,6 +1,6 @@
 <?php
 
-function can_construct_dp(string $target, array $word_bank): bool
+function construct_can_dp(string $target, array $word_bank): bool
 {
     $dp = array_fill(0, strlen($target) + 1, null);
     $dp[0] = "";
@@ -20,7 +20,7 @@ function can_construct_dp(string $target, array $word_bank): bool
     return false;
 }
 
-function can_construct_dp_v2(string $target, array $word_bank): bool
+function construct_can_dp_v2(string $target, array $word_bank): bool
 {
     $dp = array_fill(0, strlen($target) + 1, false);
     $dp[0] = true;
@@ -35,7 +35,7 @@ function can_construct_dp_v2(string $target, array $word_bank): bool
     return end($dp);
 }
 
-function can_construct_rec(string $target, array $word_bank): bool
+function construct_can_rec(string $target, array $word_bank): bool
 {
     $helper = function (int $idx = 0) use ($target, $word_bank, &$helper) {
         if ($idx == strlen($target))
@@ -54,7 +54,7 @@ function can_construct_rec(string $target, array $word_bank): bool
 }
 
 
-function can_construct_rec_v2(string $target, array $word_bank): bool
+function construct_can_rec_v2(string $target, array $word_bank): bool
 {
     $helper = function (string $target, int $idx = 0) use ($word_bank, &$helper) {
         if ($idx == count($word_bank))
@@ -71,7 +71,7 @@ function can_construct_rec_v2(string $target, array $word_bank): bool
     return $helper($target);
 }
 
-function can_construct_rec_v3(string $target, array $word_bank): bool
+function construct_can_rec_v3(string $target, array $word_bank): bool
 {
     $helper = function (string $target) use ($word_bank, &$helper) {
         if (empty($target)) {
@@ -90,7 +90,7 @@ function can_construct_rec_v3(string $target, array $word_bank): bool
     return $helper($target);
 }
 
-function can_construct_rec_memo(string $target, array $word_bank): bool
+function construct_can_rec_memo(string $target, array $word_bank): bool
 {
     $memo = ["" => true];
     $helper = function (string $target) use ($word_bank, $memo, &$helper) {

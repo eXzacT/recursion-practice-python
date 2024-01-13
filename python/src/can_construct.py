@@ -73,7 +73,6 @@ def can_construct_rec_memo(target: str, word_bank: list[str]) -> bool:
         return False
 
     return f"{helper(target)}, memo_count {memo_count}"
-    return helper(target)
 
 
 @time_execution()

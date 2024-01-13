@@ -1,0 +1,5 @@
+create filename:
+    php create_file.php {{filename}}
+
+work filename:
+    php watch_file.php {{filename}}

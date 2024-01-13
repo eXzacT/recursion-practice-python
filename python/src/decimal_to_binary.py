@@ -5,7 +5,7 @@ from common import time_execution
 @time_execution()
 def decimal_to_binary(num: int) -> str:
     res = ""
-    while num / 2 > 0:
+    while num > 0:
         remainder = num % 2
         num = num // 2
         res = str(remainder) + res
@@ -17,8 +17,7 @@ def decimal_to_binary_rec(num: int) -> str:
     def helper(num: int) -> str:
         if num == 0:
             return ""
-        remainder = num % 2
-        return helper(num//2)+str(remainder)
+        return helper(num//2)+str(num % 2)
     return helper(num)
 
 
