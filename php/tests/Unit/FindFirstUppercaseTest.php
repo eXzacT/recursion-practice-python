@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../src/find_first_uppercase.php';
+require __DIR__ . '/../../src/FindFirstUppercase.php';
 
 $test_cases = [
     ["testcaseE", 8],

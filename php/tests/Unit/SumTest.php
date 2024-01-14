@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../src/sum.php';
+require __DIR__ . '/../../src/Sum.php';
 
 $test_cases = [
     [5, 15],

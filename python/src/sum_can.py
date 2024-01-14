@@ -40,10 +40,8 @@ def can_sum_iter(target_sum: int, numbers: list[int]) -> bool:
 
 @time_execution()
 def can_sum_rec(target_sum: int, numbers: list[int]) -> bool:
-    nums_len = len(numbers)
-
     def helper(idx: int, acc=0):
-        if idx == nums_len or acc > target_sum:
+        if idx == len(numbers) or acc > target_sum:
             return False
         if acc == target_sum:
             return True
@@ -54,17 +52,15 @@ def can_sum_rec(target_sum: int, numbers: list[int]) -> bool:
 
 @time_execution()
 def can_sum_memo(target_sum: int, numbers: list[int]) -> bool:
-    nums_len = len(numbers)
     memo = {}
-    # Debug
-    # memo_count = 0
+    memo_count = 0
 
     def helper(idx: int, acc=0) -> bool:
-        # nonlocal memo_count
+        nonlocal memo_count
         if (idx, acc) in memo:
-            # memo_count += 1
+            memo_count += 1
             return memo[idx, acc]
-        if idx == nums_len or acc > target_sum:
+        if idx == len(numbers) or acc > target_sum:
             return False
         if acc == target_sum:
             return True
@@ -72,19 +68,18 @@ def can_sum_memo(target_sum: int, numbers: list[int]) -> bool:
         memo[idx, acc] = helper(idx, acc+numbers[idx]) or helper(idx+1, acc)
         return memo[idx, acc]
 
-    return helper(0)
     return f"Res: {helper(0)}, memo_count: {memo_count}"
 
 
 @time_execution()
 def can_sum_rec_v2(target_sum: int, numbers: list[int]) -> bool:
-    def helper(target_sum: int) -> bool:
-        if target_sum == 0:
+    def helper(remainder: int) -> bool:
+        if remainder == 0:
             return True
-        if target_sum < 0:
+        if remainder < 0:
             return False
         for num in numbers:
-            if helper(target_sum-num):
+            if helper(remainder-num):
                 return True
 
         return False
@@ -94,28 +89,25 @@ def can_sum_rec_v2(target_sum: int, numbers: list[int]) -> bool:
 @time_execution()
 def can_sum_memo_v2(target_sum: int, numbers: list[int]) -> bool:
     memo = {0: True}
+    memo_count = 0
 
-    # Debug
-    # memo_count = 0
+    def helper(remainder: int) -> bool:
+        nonlocal memo_count
 
-    def helper(target_sum: int) -> bool:
-        # nonlocal memo_count
-
-        if target_sum in memo:
-            # memo_count += 1
-            return memo[target_sum]
-        if target_sum < 0:
+        if remainder in memo:
+            memo_count += 1
+            return memo[remainder]
+        if remainder < 0:
             return False
 
         for num in numbers:
-            if helper(target_sum-num):
-                memo[target_sum] = True
+            if helper(remainder-num):
+                memo[remainder] = True
                 return True
 
-        memo[target_sum] = False
+        memo[remainder] = False
         return False
 
-    return helper(target_sum)
     return f"Res: {helper(target_sum)}, memo_count: {memo_count}"
 
 

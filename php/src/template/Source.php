@@ -15,7 +15,7 @@ function name_rec(): void
     return;
 }
 
-function name_tail_rec(): void
+function name_memo(): void
 {
     return;
 }

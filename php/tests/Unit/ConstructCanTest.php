@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../src/construct_can.php';
+require __DIR__ . '/../../src/ConstructCan.php';
 
 $test_cases = [
     [["enterapotentpot", ["a", "p", "ent", "enter", "ot", "o", "t"]], true],

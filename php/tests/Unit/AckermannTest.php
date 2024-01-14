@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../src/ackermann.php';
+require __DIR__ . '/../../src/Ackermann.php';
 
 
 $test_cases = [

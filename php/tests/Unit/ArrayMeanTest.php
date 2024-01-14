@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../src/array_mean.php';
+require __DIR__ . '/../../src/ArrayMean.php';
 
 $test_cases = [
     [[5, 9, 10, 25, 1], 10],

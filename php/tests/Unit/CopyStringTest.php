@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../src/copy_string.php';
+require __DIR__ . '/../../src/CopyString.php';
 
 
 $test_cases = [

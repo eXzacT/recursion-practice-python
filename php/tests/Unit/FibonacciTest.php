@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../src/fibonacci.php';
+require __DIR__ . '/../../src/Fibonacci.php';
 
 $test_cases = [
     [0, 0],

@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../src/binary_search.php';
+require __DIR__ . '/../../src/BinarySearch.php';
 
 $test_cases = [
     [[[2, 3, 4, 10, 40], 15], -1],

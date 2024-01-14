@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . '/../../src/factorial.php';
+require __DIR__ . '/../../src/Factorial.php';
 
 $test_cases = [
     [5, 120],

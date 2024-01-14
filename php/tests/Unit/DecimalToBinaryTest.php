@@ -1,6 +1,6 @@
 <?php
 
-require __DIR__ . '/../../src/decimal_to_binary.php';
+require __DIR__ . '/../../src/DecimalToBinary.php';
 
 $test_cases = [
     [5, "101"],
