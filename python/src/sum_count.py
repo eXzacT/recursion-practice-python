@@ -15,12 +15,12 @@ def count_sum_dp(target_sum: int, numbers: list) -> int:
 
 
 @time_execution()
-def count_sum(target_sum: int, numbers: list[int]) -> int:
+def count_sum_rec(target_sum: int, numbers: list[int]) -> int:
     def helper(idx: int, sum_so_far: int = 0) -> int:
-        if sum_so_far == target_sum:
-            return 1
         if idx == len(numbers) or sum_so_far > target_sum:
             return 0
+        if sum_so_far == target_sum:
+            return 1
 
         return helper(idx, sum_so_far+numbers[idx]) + helper(idx+1, sum_so_far)
 
@@ -52,7 +52,7 @@ def count_sum_memo(target_sum: int, numbers: list[int]) -> int:
 
 
 @time_execution()
-def count_sum_v2(target_sum: int, numbers: list) -> int:
+def count_sum_rec_v2(target_sum: int, numbers: list) -> int:
     def helper(sum_so_far: int, last_used_index: int) -> int:
         if sum_so_far == target_sum:
             return 1
@@ -70,7 +70,7 @@ def count_sum_v2(target_sum: int, numbers: list) -> int:
 
 
 @time_execution()
-def count_sum_v2_memo(target_sum: int, numbers: list) -> int:
+def count_sum_memo_v2(target_sum: int, numbers: list) -> int:
     memo = {}
     memo_count = 0
 
@@ -78,13 +78,13 @@ def count_sum_v2_memo(target_sum: int, numbers: list) -> int:
         nonlocal memo_count
         key = (sum_so_far, last_used_index)
 
+        if sum_so_far > target_sum:
+            return 0
         if sum_so_far == target_sum:
             return 1
         if key in memo:
             memo_count += 1
             return memo[key]
-        if sum_so_far > target_sum:
-            return 0
 
         count = 0
         # Only consider numbers at or after the last used index to prevent permutations of the same combination
@@ -98,7 +98,7 @@ def count_sum_v2_memo(target_sum: int, numbers: list) -> int:
 
 
 print(count_sum_dp(35, [1, 2, 3]))
-print(count_sum(35, [1, 2, 3]))
+print(count_sum_rec(35, [1, 2, 3]))
 print(count_sum_memo(35, [1, 2, 3]))
-print(count_sum_v2(35, [1, 2, 3]))
-print(count_sum_v2_memo(35, [1, 2, 3]))
+print(count_sum_rec_v2(35, [1, 2, 3]))
+print(count_sum_memo_v2(35, [1, 2, 3]))
