@@ -18,12 +18,8 @@ $functions = [
 it('calculates the mean of an array', function ($input, $expected) use ($functions) {
     foreach ($functions as $func) {
         $start_time = microtime(true);
-        try {
-            expect($func($input))->toBe($expected);
-        } catch (\Throwable) {
-            // Not sure if pest provides a way to see which function failed exactly, that's why I'm wrapping this
-            throw new Exception("Test failed for function '{$func}' with result '{$func($input)}' expected '{$expected}'");
-        }
+        $actual = $func($input);
+        expect($actual)->toBe($expected, "Failed test for function {$func}: expected {$expected}, but got {$actual}");
         $end_time = microtime(true);
         echo "Execution time of '{$func}': " . round(($end_time - $start_time) * 1000, 4) . " ms\n";
     }

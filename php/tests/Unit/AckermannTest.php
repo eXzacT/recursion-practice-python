@@ -12,24 +12,26 @@ $test_cases = [
 ];
 
 $functions = [
-    'ackermann_dp' => 'ackermann_dp',
-    'ackermann_rec' => 'ackermann_rec',
-    'ackermann_rec_memo' => 'ackermann_rec_memo',
+    'ackermann_dp',
+    'ackermann_rec',
+    'ackermann_rec_memo',
 ];
 
 it('returns the correct ackermanns number', function ($input, $expected) use ($functions) {
     [$m, $n] = $input;
-    foreach ($functions as $func_name => $func) {
+    foreach ($functions as $func) {
         $start_time = microtime(true);
-        expect($func($m, $n))->toBe($expected);
+        $actual = $func($m, $n);
+        expect($actual)->toBe($expected, "Failed test for function {$func}: expected {$expected}, but got {$actual}");
         $end_time = microtime(true);
-        echo "Execution time of '{$func_name}': " . round(($end_time - $start_time) * 1000, 4) . " ms\n";
+        echo "Execution time of '{$func}': " . round(($end_time - $start_time) * 1000, 4) . " ms\n";
     }
 })->with($test_cases);
 
 it('returns the correct ackermanns number for a large input', function () {
     $start_time = microtime(true);
-    expect(ackermann_dp(6, 6))->toBe(1014754159855);
+    $actual = ackermann_dp(6, 6);
+    expect($actual)->toBe(1014754159855, "Failed test for function ackermann_dp: expected 1014754159855, but got {$actual}");
     $end_time = microtime(true);
     echo "Execution time of 'ackermann_dp': " . round(($end_time - $start_time) * 1000, 4) . " ms\n";
 });

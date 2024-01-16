@@ -20,7 +20,8 @@ it('returns whether a given string can be constructed from a given word bank', f
     [$target, $word_bank] = $input;
     foreach ($functions as $func_name => $func) {
         $start_time = microtime(true);
-        expect($func($target, $word_bank))->toBe($expected);
+        $actual = $func($target, $word_bank);
+        expect($actual)->toBe($expected, "Failed test for function {$func}: expected {$expected}, but got {$actual}");
         $end_time = microtime(true);
         echo "Execution time of '{$func_name}': " . round(($end_time - $start_time) * 1000, 4) . " ms\n";
     }

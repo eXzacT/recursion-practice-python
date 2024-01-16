@@ -8,9 +8,20 @@ $test_cases = [
     [3, 6],
 ];
 
-it('returns a factorial for given number', function ($n, $expected) {
-    expect(factorial($n))->toBe($expected);
-    expect(factorial_reduce($n))->toBe($expected);
-    expect(factorial_rec($n))->toBe($expected);
-    expect(factorial_tail_rec($n))->toBe($expected);
+$functions = [
+    'factorial',
+    'factorial_reduce',
+    'factorial_rec',
+    'factorial_tail_rec',
+];
+
+it('returns a factorial for given number', function ($input, $expected) use ($functions) {
+    foreach ($functions as $func) {
+        $start_time = microtime(true);
+        $actual = $func($input);
+        expect($actual)->toBe($expected, "Failed test for function {$func}: expected {$expected}, but got {$actual}");
+        $end_time = microtime(true);
+        echo "Execution time of '{$func}': " . round(($end_time - $start_time) * 1000, 4) . " ms\n";
+    }
+    echo "\n";
 })->with($test_cases);

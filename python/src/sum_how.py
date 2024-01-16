@@ -10,10 +10,11 @@ def how_sum_tabulation(target_sum: int, numbers: list[int]) -> list[int] | None:
     for i in range(target_sum+1):
         if table[i] is not None:  # [] or contains some numbers
             for num in numbers:
-                if i+num == target_sum:  # Found a solution
-                    return table[i+num]
                 if i+num < target_sum:  # Still smaller
                     table[i+num] = table[i] + [num]
+                    continue
+                if i+num == target_sum:  # Found a solution
+                    return table[i]+[num]
     return None
 
 
@@ -42,12 +43,11 @@ def how_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int] | None:
 
     def helper(target_sum: int):
         nonlocal memo_count
-
+        if target_sum < 0:
+            return None
         if target_sum in memo:
             memo_count += 1
             return memo[target_sum]
-        if target_sum < 0:
-            return None
 
         for num in numbers:
             remainder = target_sum - num
@@ -59,7 +59,6 @@ def how_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int] | None:
         return None
 
     return f"Res: {helper(target_sum)}, memo_count: {memo_count}\n"
-    return helper(target_sum)
 
 
 @time_execution()
@@ -81,10 +80,8 @@ def how_sum_rec_v2(target_sum: int, numbers: list[int]) -> list[int] | None:
 
 
 @time_execution()
-def how_sum_rec_v2_memo(target_sum: int, numbers: list[int]) -> list[int]:
-    nums_len = len(numbers)
+def how_sum_rec_v2_memo(target_sum: int, numbers: list[int]) -> list[int] | None:
     memo = {target_sum: []}
-
     memo_count = 0
 
     def helper(idx: int, sum_so_far=0):
@@ -95,22 +92,19 @@ def how_sum_rec_v2_memo(target_sum: int, numbers: list[int]) -> list[int]:
             memo_count += 1
             return memo[key]
 
-        if sum_so_far > target_sum or idx == nums_len:
+        if sum_so_far > target_sum or idx == len(numbers):
             return None
 
         if (res := helper(idx, sum_so_far + numbers[idx])) is not None:
-            memo[key] = [numbers[idx]] + res
-            return memo[key]
+            return [numbers[idx]] + res
 
         if (res := helper(idx + 1, sum_so_far)) is not None:
-            memo[key] = res
-            return memo[key]
+            return res
 
         memo[key] = None
         return None
 
     return f"Res: {helper(0)}, memo_count: {memo_count}\n"
-    return helper(0)
 
 
 print(how_sum_tabulation(300, [7, 14]))
@@ -118,5 +112,7 @@ print(how_sum_tabulation(300, [7, 14]))
 print(how_sum_rec_memo(300, [7, 14]))
 print(how_sum_rec_v2(300, [7, 14]))
 print(how_sum_rec_v2_memo(300, [7, 14]))
+
+print(how_sum_tabulation(300, [21, 5, 9, 12, 30]))
 print(how_sum_rec_memo(300, [21, 5, 9, 12, 30]))
 print(how_sum_rec_v2_memo(300, [21, 5, 9, 12, 30]))
