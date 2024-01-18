@@ -47,7 +47,7 @@ function sum_how_memo(int $target, array $arr): array|null
     $helper = function (int $remainder, int $idx = 0) use ($arr, &$memo, &$helper): array|null {
         if ($remainder < 0 || $idx == count($arr))
             return null;
-        if (isset($memo[$remainder]))
+        if (array_key_exists($remainder, $memo))
             return $memo[$remainder];
 
         $res = $helper($remainder - $arr[$idx], $idx);
@@ -90,7 +90,7 @@ function sum_how_memo_v2(int $target, array $arr): array|null
         if ($remainder < 0) {
             return null;
         }
-        if (isset($memo[$remainder])) {
+        if (array_key_exists($remainder, $memo)) {
             return $memo[$remainder];
         }
 

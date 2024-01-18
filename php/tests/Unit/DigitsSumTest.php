@@ -1,20 +1,22 @@
 <?php
 
-require __DIR__ . '/../../src/DecimalToBinary.php';
+require __DIR__ . '/../../src/DigitsSum.php';
 
 $test_cases = [
-    [5, "101"],
-    [7, "111"],
-    [0, "0"],
+    [23959, 28],
+    [0, 0],
+    [10, 1],
 ];
 
 $functions = [
-    'decimal_to_binary',
-    'decimal_to_binary_rec',
-    'decimal_to_binary_tail_rec',
+    'digits_sum_string',
+    'digits_sum_modulo',
+    'digits_sum_reduce',
+    'digits_sum_rec',
 ];
 
-it('returns a binary representation of a given number', function ($input, $expected) use ($functions) {
+// First function call is slower for some reason, so whatever is called first will be slowest
+it('sums digits of a number', function ($input, $expected) use ($functions) {
     foreach ($functions as $func) {
         $start_time = microtime(true);
         $actual = $func($input);

@@ -3,21 +3,19 @@ from common import time_execution
 
 
 @time_execution()
-def best_sum_tabulation(target_sum, numbers):
-    table = [None] * (target_sum + 1)
-    table[0] = []  # Base case
+def best_sum_dp(target_sum, numbers):
+    dp = [None] * (target_sum + 1)
+    dp[0] = []  # Base case
 
     for i in range(target_sum + 1):
-        if table[i] is not None:
+        if dp[i] is not None:
             for num in numbers:
-                if i + num < target_sum:
-                    curr_combination = [num] + table[i]
-                    shortest_combination = table[i+num]
-                    if not shortest_combination or len(curr_combination) < len(shortest_combination):
-                        shortest_combination = curr_combination
+                if i + num <= target_sum:
+                    # If that entry doesn't exist yet or we found a shorter combination
+                    if not dp[i+num] or len(dp[i])+1 < len(dp[i+num]):
+                        dp[i+num] = [num]+dp[i]
 
-    # After the loop this will be the shortest combination
-    return table[target_sum]
+    return dp[target_sum]
 
 
 @time_execution()
@@ -74,20 +72,21 @@ def best_sum_rec_memo(target_sum: int, numbers: list[int]) -> list[int]:
         return memo[target]
 
     return f"{helper(target_sum)}, memo count: {memo_count}"
-    return helper(target_sum)
 
 
 @time_execution()
 def best_sum_rec_v2(target_sum: int, numbers: list[int]) -> list[int] | None:
-    nums_len = len(numbers)
     shortest_combination = None
 
     def helper(target: int, idx=0, nums_so_far=[]):
         nonlocal shortest_combination
-
+        if target < 0 or idx == len(numbers):
+            return None
         if target == 0:
             return nums_so_far
-        if target < 0 or idx == nums_len:
+
+        # # Return early if we already have more elements in the combination
+        if shortest_combination and len(nums_so_far) > len(shortest_combination):
             return None
 
         combination = helper(
@@ -131,10 +130,9 @@ def best_sum_rec_v2_memo(target_sum: int, numbers: list[int]) -> list[int] | Non
         return memo[key]
 
     return f"{helper(target_sum)}, memo count: {memo_count}"
-    return helper(target_sum)
 
 
-print(best_sum_tabulation(35, [1, 2, 3]))
+print(best_sum_dp(35, [1, 2, 3]))
 # print(best_sum_rec(35, [1, 2, 3]))
 print(best_sum_rec_memo(35, [1, 2, 3]))
 print(best_sum_rec_v2(35, [1, 2, 3]))

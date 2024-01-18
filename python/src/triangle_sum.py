@@ -7,18 +7,6 @@ def triangle_sum(arr: list[int]) -> list[list[int]]:
     sum_matrix = [arr]
 
     while len(arr) > 1:
-        arr = list(map(lambda idx_curr: idx_curr[1] +
-                       arr[idx_curr[0]+1], enumerate(arr[:-1])))
-        sum_matrix.append(arr)
-
-    return sum_matrix
-
-
-@time_execution()
-def triangle_sum_v2(arr: list[int]) -> list[list[int]]:
-    sum_matrix = [arr]
-
-    while len(arr) > 1:
         arr = [arr[idx]+arr[idx+1] for idx in range(len(arr)-1)]
         sum_matrix.append(arr)
 
@@ -49,13 +37,11 @@ def triangle_sum_tail_rec(arr: list[int]) -> list[list[int]]:
     sum_matrix = [arr]
 
     def helper(arr):
-        arr_len = len(arr)
         row = []
-
-        if arr_len == 1:
+        if len(arr) == 1:
             return sum_matrix
 
-        for i in range(arr_len-1):
+        for i in range(len(arr)-1):
             row.append(arr[i]+arr[i+1])
 
         sum_matrix.append(row)
@@ -85,7 +71,6 @@ def triangle_sum_tail_gen(arr: list[int]) -> list[list[int]]:
 
 
 print(triangle_sum([1, 2, 3, 4, 5]))
-print(triangle_sum_v2([1, 2, 3, 4, 5]))
 print(triangle_sum_rec([1, 2, 3, 4, 5]))
 print(triangle_sum_tail_rec([1, 2, 3, 4, 5]))
 print(triangle_sum_tail_gen([num for num in range(800)]))
