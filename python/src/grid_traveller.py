@@ -1,22 +1,50 @@
-# Traveller on a 2d grid, how many ways can you travel
-# from top left to bottom right, can only move down or right
+'''Given an m*n grid how many ways can you get from top left to bottom right
+    You can only go down or right
+'''
 from common import time_execution
 
 
 @time_execution()
 def grid_traveller_tabulation(m: int, n: int) -> int:
-    table = [[0 for _ in range(n+1)]for _ in range(m+1)]
-    table[0][0] = 1
+    dp = [[0 for _ in range(n)]for _ in range(m)]
+    dp[0][0] = 1
 
     for i in range(m):
         for j in range(n):
-            current = table[i][j]
+            current = dp[i][j]
             if i+1 < m:
-                table[i+1][j] += current
+                dp[i+1][j] += current
             if j+1 < n:
-                table[i][j+1] += current
+                dp[i][j+1] += current
 
-    return table[i][j]
+    return dp[-1][-1]
+
+
+@time_execution(executions=100)
+def grid_traveller_tabulation_v2(m: int, n: int) -> int:
+    dp = [[0 for _ in range(n)]for _ in range(m)]
+    for i in range(m):
+        dp[i][0] = 1
+
+    for j in range(1, n):
+        dp[0][j] = 1
+
+    for i in range(1, m):
+        for j in range(1, n):
+            dp[i][j] = dp[i-1][j]+dp[i][j-1]
+
+    return dp[-1][-1]
+
+
+@time_execution(executions=100)
+def grid_traveller_tabulation_v3(m: int, n: int) -> int:
+    dp = [[1 if i == 0 or j == 0 else 0 for j in range(n)] for i in range(m)]
+
+    for i in range(1, m):
+        for j in range(1, n):
+            dp[i][j] = dp[i-1][j]+dp[i][j-1]
+
+    return dp[-1][-1]
 
 
 @time_execution()
@@ -113,8 +141,30 @@ def grid_traveller_rec_v2_memo(m: int, n: int) -> int:
     return f"Result is: {helper(m, n)}\nMemo calls: {memo_usages}\nRecursive calls:{recursive_calls}"
 
 
+@time_execution()
+def grid_traveller_rec_v3(m: int, n: int) -> int:
+    if m == 0 or n == 0:
+        return 0
+
+    def helper(m: int, n: int) -> int:
+        if m == 1 and n == 1:
+            return 1
+        down = right = 0
+        if m > 1:
+            down = helper(m-1, n)
+        if n > 1:
+            right = helper(m, n-1)
+
+        return down+right
+
+    return helper(m, n)
+
+
 print(grid_traveller_tabulation(10, 10))
+print(grid_traveller_tabulation_v2(10, 10))
+print(grid_traveller_tabulation_v3(10, 10))
 print(grid_traveller_rec(10, 10))
+print(grid_traveller_rec_v3(10, 10))
 print(grid_traveller_rec_memo(10, 10))
 print(grid_traveller_rec_v2(10, 10))
 print(grid_traveller_rec_v2_memo(10, 10))
