@@ -22,7 +22,7 @@ def all_construct_tabulation(target: str, word_bank: list[str]) -> list[list[str
 def all_construct_rec(target: str, word_bank: list[str]) -> list[list[str]]:
     all_constructs = []
 
-    def helper(target: str, construct=[]) -> list[list[str]]:
+    def helper(target: str, construct=[]) -> None:
         if target == '':
             all_constructs.append(construct)
             return
@@ -41,7 +41,7 @@ def all_construct_rec_memo(target: str, word_bank: list[str]) -> list[list[str]]
     memo = {'': None}
     memo_count = 0
 
-    def helper(target: str, construct=[]) -> list[list[str]]:
+    def helper(target: str, construct=[]) -> None:
         nonlocal memo_count
         if target in memo:
             memo_count += 1
@@ -64,7 +64,7 @@ def all_construct_rec_v2(target: str, word_bank: list[str]) -> list[list[str]]:
     word_bank_len = len(word_bank)
     all_constructs = []
 
-    def helper(target: str, idx: int, construct=[]) -> list[list[str]]:
+    def helper(target: str, idx: int, construct=[]) -> None:
         if target == '':
             all_constructs.append(construct)
             return

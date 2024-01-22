@@ -30,14 +30,24 @@ def fibonacci_dp(n: int) -> int:
 
 
 @time_execution()
-def fibonacci_rec(n: int) -> int:
-    if n < 0:
+def fibonacci_dp_v2(n: int) -> int:
+    if n == 0:
         return 0
+    prevprev = 0
+    prev = 1
+    for _ in range(2, n+1):
+        prevprev, prev = prev, prevprev+prev
 
+    return prev
+
+
+@time_execution()
+def fibonacci_rec(n: int) -> int:
     def helper(n: int) -> int:
         if n <= 1:
             return n
         return helper(n-1) + helper(n-2)
+
     return helper(n)
 
 
@@ -58,8 +68,8 @@ def fibonacci_tail_rec(n: int) -> int:
     def helper(n: int, curr=0, nxt=1):
         if n == 0:
             return curr
-        else:
-            return helper(n-1, nxt, curr+nxt)
+        return helper(n-1, nxt, curr+nxt)
+
     return helper(n)
 
 
@@ -75,6 +85,7 @@ def fibonacci_gen(n: int) -> int:
 
 print(fibonacci_iter(10))
 print(fibonacci_dp(10))
+print(fibonacci_dp_v2(10))
 print(fibonacci_rec(10))
 print(fibonacci_tail_rec(10))
 
