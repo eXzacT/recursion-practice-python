@@ -130,5 +130,3 @@ function sum_all_memo_v2(int $target, array $nums): array|null
     };
     return $helper($target);
 }
-
-echo json_encode(sum_all_dp(15, [10, 9, 3, 2, 1])) . "\n";
