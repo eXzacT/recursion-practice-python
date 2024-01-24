@@ -34,7 +34,7 @@ def lcs_len_hunt_szymanski(a: str, b: str) -> int:
         idx.reverse()
 
     a_filtered = []
-    # Create a list of indices in str1 for each character in str2
+    # Create a list of indices in str1 for each character in str2 that is also in str1
     # This list is created in the order of characters in str2
     for char in b:
         a_filtered.extend(a_indices[char])
@@ -95,9 +95,6 @@ def lcs_len_memo(s1: str, s2: str) -> int:
 
 s1 = "abracadabraalakazam"
 s2 = "aceofspadesjackofhearts"
-
-s1 = "abeceda"
-s2 = "aeeda"
 
 print(lcs_len_dp(s1, s2))
 print(lcs_len_hunt_szymanski(s1, s2))
