@@ -4,6 +4,7 @@
     We are only allowed to dig down, downleft and downright
 '''
 from common import time_execution
+import networkx as nx
 
 
 @time_execution()
@@ -95,6 +96,27 @@ def gold_mine_memo(grid: list[list[int]]) -> int:
     return f"{max([helper(0, j) for j in range(WIDTH)])}, memo_hits:{memo_hits}"
 
 
+@time_execution()
+def gold_mine_nx(grid: list[list[int]]) -> int:
+    WIDTH = len(grid[0])
+    HEIGHT = len(grid)
+    G = nx.DiGraph()
+    # Node we use to connect to each of the nodes in the first row, because we want to add their weight too
+    dummy_node = (-1, -1)
+
+    for i in range(HEIGHT-1):
+        for j in range(WIDTH):
+            if i == 0:  # Without this the longest path wouldn't add the start node value to the weight
+                G.add_edge(dummy_node, (i, j), weight=grid[i][j])
+            if j != 0:  # If it's not the beginning of the row we can add the downleft since it's in bounds
+                G.add_edge((i, j), (i+1, j-1), weight=grid[i+1][j-1])
+            if j != WIDTH-1:  # If it's not the end of the row we can add the downright since it's in bounds
+                G.add_edge((i, j), (i+1, j+1), weight=grid[i+1][j+1])
+            G.add_edge((i, j), (i+1, j), weight=grid[i+1][j])
+
+    return nx.dag_longest_path_length(G, weight='weight')
+
+
 mine = [
     [3, 2, 12, 15, 10],
     [6, 19, 7, 11, 17],
@@ -106,3 +128,4 @@ print(gold_mine_dp(mine))
 print(gold_mine_iter(mine))
 print(gold_mine_rec(mine))
 print(gold_mine_memo(mine))
+print(gold_mine_nx(mine))
