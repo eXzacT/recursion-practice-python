@@ -46,7 +46,7 @@ def levenshtein_distance_dp_v2(word1: str, word2: str) -> int:
                 curr[j] = prev[j-1]
             else:  # Best distance so far between topleft, top and left positions +1
                 curr[j] = 1+min(prev[j-1], prev[j], left)
-            # Number at the current position becomes left for the column in this row
+             # Update left to be the current element
             left = curr[j]
 
         # Make prev be the list with newly updated values, also change the first value to be same as row idx
