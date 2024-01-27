@@ -1,10 +1,9 @@
 # Print all longest common sub-sequences in lexicographical order
-from pprint import pprint
 from common import time_execution
 
 
 @time_execution()
-def longest_common_sub_sequences_rec(s1: str, s2: str) -> list[str]:
+def increasing_lcs_rec(s1: str, s2: str) -> list[str]:
     sub_sequences = []
 
     def helper(s1: str, start=0, string_so_far=''):
@@ -23,8 +22,8 @@ def longest_common_sub_sequences_rec(s1: str, s2: str) -> list[str]:
     return sorted(list(filter(lambda x: len(x) == len(max(sub_sequences, key=len)), sub_sequences)))
 
 
-@time_execution(executions=100)
-def longest_common_sub_sequences_memo(s1: str, s2: str) -> list:
+@time_execution()
+def increasing_lcs_memo(s1: str, s2: str) -> list:
 
     sub_sequences = []
     memo_hit = 0
@@ -55,35 +54,34 @@ def longest_common_sub_sequences_memo(s1: str, s2: str) -> list:
 
 
 @time_execution()
-def longest_common_sub_sequences_tabulation(s1: str, s2: str) -> list[str]:
+def increasing_lcs_dp(s1: str, s2: str) -> list[str]:
     m, n = len(s1), len(s2)
-    table = [[set() for _ in range(n+1)] for __ in range(m+1)]
+    dp = [[set() for _ in range(n+1)] for __ in range(m+1)]
     # The LCS of an empty string and any other string is an empty string
     for i in range(m+1):
-        table[i][0] = {""}
+        dp[i][0] = {""}
     for j in range(n+1):
-        table[0][j] = {""}
+        dp[0][j] = {""}
 
     for i in range(1, m+1):
         for j in range(1, n+1):
             if s1[i-1] == s2[j-1]:
                 # Add current character to each substring positioned [i-1][j-1]
-                table[i][j] = {lcs + s1[i-1] for lcs in table[i-1][j-1]}
+                dp[i][j] = {lcs + s1[i-1] for lcs in dp[i-1][j-1]}
             else:  # Copyover longer substring from pos [i-1][j] or [i][j-1]
-                if len(max(table[i-1][j], key=len)) > len(max(table[i][j-1], key=len)):
-                    table[i][j] = table[i-1][j]
-                elif len(max(table[i-1][j], key=len)) < len(max(table[i][j-1], key=len)):
-                    table[i][j] = table[i][j-1]
+                if len(max(dp[i-1][j], key=len)) > len(max(dp[i][j-1], key=len)):
+                    dp[i][j] = dp[i-1][j]
+                elif len(max(dp[i-1][j], key=len)) < len(max(dp[i][j-1], key=len)):
+                    dp[i][j] = dp[i][j-1]
                 else:  # If they're same length then do a union
-                    table[i][j] = table[i-1][j] | table[i][j-1]
+                    dp[i][j] = dp[i-1][j] | dp[i][j-1]
 
-    # pprint(table)
     # The bottom-right cell contains all LCSs of s1 and s2
-    return sorted(table[m][n])
+    return sorted(dp[m][n])
 
 
 s1 = 'ABCBDABABCBDAB'
 s2 = 'BDCABBDCAB'
-print(longest_common_sub_sequences_tabulation(s1, s2))
-print(longest_common_sub_sequences_rec(s1, s2))
-print(longest_common_sub_sequences_memo(s1, s2))
+print(increasing_lcs_dp(s1, s2))
+print(increasing_lcs_rec(s1, s2))
+print(increasing_lcs_memo(s1, s2))

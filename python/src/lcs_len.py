@@ -2,6 +2,7 @@
     example "abdacbab" and "acebfca", abca is in both those strings(not necessarily right after the other)
 '''
 import bisect
+import networkx as nx
 from common import time_execution
 from collections import defaultdict
 
@@ -19,6 +20,26 @@ def lcs_len_dp(s1: str, s2: str) -> int:
                 dp[i][j] = max(dp[i-1][j], dp[i][j-1])
 
     return dp[-1][-1]
+
+
+@time_execution()
+def lcs_len_dp_v2(s1: str, s2: str) -> int:
+    WIDTH = len(s2)+1
+    HEIGHT = len(s1)+1
+
+    prev = [0]*WIDTH
+
+    for i in range(1, HEIGHT):
+        left = 0
+        for j in range(1, WIDTH):
+            if s1[i-1] == s2[j-1]:
+                prev[j] = 1+left
+            else:
+                prev[j] = max(prev[j], left)
+
+            left = prev[j]
+
+    return prev[-1]
 
 
 @time_execution()
@@ -90,13 +111,44 @@ def lcs_len_memo(s1: str, s2: str) -> int:
         memo[key] = max(helper(i+1, j), helper(i, j+1))
         return memo[key]
 
-    return f"{helper(0, 0)}, memo_hits: {memo_hits}"
+    return helper(0, 0)
+    # return f"{helper(0, 0)}, memo_hits: {memo_hits}"
 
 
-s1 = "abracadabraalakazam"
-s2 = "aceofspadesjackofhearts"
+@time_execution()
+def lcs_len_nx(s1: str, s2: str) -> int:
+    G = nx.DiGraph()
+    stack = [(0, 0)]
+    visited = set()
 
-print(lcs_len_dp(s1, s2))
-print(lcs_len_hunt_szymanski(s1, s2))
-# print(lcs_len_rec(s1, s2))
-print(lcs_len_memo(s1, s2))
+    while stack:
+        i, j = stack.pop()
+        if (i, j) in visited:
+            continue
+        visited.add((i, j))
+
+        if i == len(s1) or j == len(s2):
+            continue
+        if s1[i] == s2[j]:
+            G.add_edge((i, j), (i+1, j+1), weight=1)
+            stack.append((i+1, j+1))
+            continue
+        else:
+            G.add_edge((i, j), (i+1, j), weight=0)
+            stack.append((i+1, j))
+            G.add_edge((i, j), (i, j+1), weight=0)
+            stack.append((i, j+1))
+
+    return nx.dag_longest_path_length(G)
+
+
+if __name__ == "__main__":
+    s1 = "abracadabraalakazam"
+    s2 = "aceofspadesjackofhearts"
+
+    print(lcs_len_dp(s1, s2))
+    print(lcs_len_dp_v2(s1, s2))
+    print(lcs_len_hunt_szymanski(s1, s2))
+    # print(lcs_len_rec(s1, s2))
+    print(lcs_len_memo(s1, s2))
+    print(lcs_len_nx(s1, s2))

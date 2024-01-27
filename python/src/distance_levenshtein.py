@@ -73,7 +73,7 @@ def levenshtein_distance_rec(word1: str, word2: str) -> int:
     return helper(0, 0)
 
 
-@time_execution(executions=100)
+@time_execution()
 def levenshtein_distance_memo(word1: str, word2: str) -> int:
     memo = {}
     memo_hits = 0
