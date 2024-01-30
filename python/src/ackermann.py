@@ -1,4 +1,7 @@
-from common import time_execution, RecursionTree
+if __name__ == "__main__":
+    from common import time_execution, RecursionTree
+else:
+    from src.common import time_execution, RecursionTree
 
 
 @time_execution()
@@ -43,13 +46,10 @@ def ackermann_rec(m: int, n: int) -> int:
 @time_execution()
 def ackermann_memo(m: int, n: int) -> int:
     memo = {}
-    memo_count = 0
 
     def helper(m: int, n: int) -> int:
-        nonlocal memo_count
         key = (m, n)
         if key in memo:
-            memo_count += 1
             return memo[key]
         if m == 0:
             return n+1
@@ -59,11 +59,11 @@ def ackermann_memo(m: int, n: int) -> int:
         memo[key] = helper(m-1, helper(m, n-1))
         return memo[key]
 
-    return f"{helper(m, n)} memo_hits={memo_count}"
+    return helper(m, n)
 
 
 @time_execution(executions=1)
-def ackermann_tree_draw(m: int, n: int, tree: RecursionTree) -> int:
+def recursion_tree(m: int, n: int, tree: RecursionTree) -> int:
     def helper(m: int, n: int, tree: RecursionTree) -> int:
         tree.call = 'ackerman_rec('+str(m)+','+str(n)+')'
         if m == 0:
@@ -85,10 +85,11 @@ def ackermann_tree_draw(m: int, n: int, tree: RecursionTree) -> int:
     return helper(m, n, tree)
 
 
-print(ackermann_dp(5, 5))  # Blazingly fast
-print(ackermann_rec(3, 4))
-print(ackermann_memo(3, 4))
+if __name__ == "__main__":
+    print(ackermann_dp(5, 5))  # Blazingly fast
+    print(ackermann_rec(3, 4))
+    print(ackermann_memo(3, 4))
 
-tree = RecursionTree()
-ackermann_tree_draw(2, 2, tree)
-tree.printTree()
+    tree = RecursionTree()
+    recursion_tree(2, 2, tree)
+    tree.printTree()

@@ -1,26 +1,33 @@
 # Mean of Array using Iteration and Recursion
-from common import time_execution
-import itertools
-import functools
+from functools import reduce
+from operator import add
+
+if __name__ == "__main__":
+    from common import time_execution
+else:
+    from src.common import time_execution
 
 
 @time_execution()
 def array_mean(arr: list) -> float:
-    sum = 0
+    arr_sum = 0
     for el in arr:
-        sum += el
-    return sum/len(arr)
+        arr_sum += el
+    return arr_sum/len(arr)
 
 
 @time_execution()
-def array_mean_rec(arr: list) -> float:
-    length = len(arr)
+def array_mean_reduce(arr: list) -> float:
+    return reduce(add, arr)/len(arr)
 
+
+@time_execution()
+def array_mean_rec(arr: list[int]) -> float:
     def helper(idx: int):
-        if idx >= length:
+        if idx == len(arr):
             return 0
         return arr[idx]+helper(idx+1)
-    return helper(0)/length
+    return helper(0)/len(arr)
 
 
 @time_execution()
@@ -35,39 +42,30 @@ def array_mean_tail_rec(arr: list[int]) -> float:
 
 @time_execution()
 def array_mean_tail_rec_v2(arr: list) -> float:
-    length = len(arr)
-
-    def helper(idx: int, acc=0):
-        if idx >= length:
-            return acc/length
-        # Also not using slices, saves memory
+    def helper(idx: int = 0, acc: int = 0) -> float:
+        if idx == len(arr):
+            return acc/len(arr)
         return helper(idx+1, acc + arr[idx])
 
-    return helper(0)
+    return helper()
 
 
 @time_execution(isTrampoline=True)
 def array_mean_gen(arr: list) -> float:
-    # No need to count length since we pass it in the first call to a helper func
-    length = len(arr)
-
-    def helper(idx: int, acc=0):
-        if idx >= length:
-            yield acc/length
-        # Also not using slices, saves memory
+    def helper(idx: int = 0, acc: int = 0):
+        if idx == len(arr):
+            yield acc/len(arr)
         yield helper(idx+1, acc + arr[idx])
 
-    yield helper(0)
+    yield helper()
 
 
-arr = [i for i in range(1, 11)]
-print(array_mean(arr))
-print(array_mean_rec(arr))
-print(array_mean_tail_rec(arr))
-print(array_mean_tail_rec_v2(arr))
-# print(array_mean_rec([i for i in range(10_000)]))
-print(array_mean_gen([i for i in range(1, 10_001)]))
-
-# Bonus
-print(list(itertools.accumulate(arr, lambda x, y: x+y))[len(arr)-1]/len(arr))
-print(functools.reduce(lambda x, y: x+y, arr)/len(arr))
+if __name__ == "__main__":
+    arr = [i for i in range(1, 100)]
+    print(array_mean(arr))
+    print(array_mean_reduce(arr))
+    print(array_mean_rec(arr))
+    print(array_mean_tail_rec(arr))
+    print(array_mean_tail_rec_v2(arr))
+    # print(array_mean_rec([i for i in range(10_000)]))
+    print(array_mean_gen([i for i in range(1, 10_001)]))

@@ -2,7 +2,6 @@
 from common import time_execution
 import networkx as nx
 import bisect
-import matplotlib.pyplot as plt
 
 
 @time_execution()
