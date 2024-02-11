@@ -5,7 +5,6 @@ test_cases = [
     ((1, 1), 3),
     ((0, 0), 1),
     ((3, 4), 125),
-    # ((1, 0), 2), #Doesn't work for any (m,0), not sure how to fix it
     ((0, 1), 2)
 ]
 
