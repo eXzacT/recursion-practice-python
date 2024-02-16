@@ -3,21 +3,6 @@ from common import time_execution, RecursionTree
 
 
 @time_execution()
-def fibonacci_iter(n: int) -> int:
-    a = 0
-    b = 1
-
-    if n == 0:
-        return 0
-    if n == 1:
-        return 1
-
-    for _ in range(2, n+1):
-        a, b = b, a+b
-    return b
-
-
-@time_execution()
 def fibonacci_dp(n: int) -> int:
     if n == 0:
         return 0
@@ -33,12 +18,12 @@ def fibonacci_dp(n: int) -> int:
 def fibonacci_dp_v2(n: int) -> int:
     if n == 0:
         return 0
-    prevprev = 0
-    prev = 1
+    prev = 0
+    curr = 1
     for _ in range(2, n+1):
-        prevprev, prev = prev, prevprev+prev
+        prev, curr = curr, prev+curr
 
-    return prev
+    return curr
 
 
 @time_execution()
@@ -65,25 +50,24 @@ def fibonacci_memo(n: int) -> int:
 
 @time_execution()
 def fibonacci_tail_rec(n: int) -> int:
-    def helper(n: int, curr=0, nxt=1):
+    def helper(n: int, prev=0, curr=1):
         if n == 0:
-            return curr
-        return helper(n-1, nxt, curr+nxt)
+            return prev
+        return helper(n-1, curr, prev+curr)
 
     return helper(n)
 
 
 @time_execution(isTrampoline=True)
 def fibonacci_gen(n: int) -> int:
-    def helper(n: int, curr=0, nxt=1):
+    def helper(n: int, prev=0, curr=1):
         if n == 0:
-            yield curr
+            yield prev
         else:
-            yield helper(n-1, nxt, curr+nxt)
+            yield helper(n-1, curr, prev+curr)
     return helper(n)
 
 
-print(fibonacci_iter(10))
 print(fibonacci_dp(10))
 print(fibonacci_dp_v2(10))
 print(fibonacci_rec(10))
